@@ -1,0 +1,58 @@
+﻿
+html{
+    height:100%;
+}
+
+body{
+    height:100%;
+    margin:0;
+}
+
+.divBody{
+    width:1024px;
+    height:100%;
+    margin:0px auto;
+}
+
+.mainTable{
+    width:100%;
+    height:100%;
+    text-align:center;
+    border-collapse:collapse;
+    border:1px solid black;
+}
+
+.mainTableTitleBar{
+    font:48px arial;
+}
+
+.mainTableFooter{
+    height:5%;
+}
+
+.mainTableGameArea{
+    height:700px;
+    border-collapse:collapse;
+    border:1px solid black;
+}
+
+.mainTableNavCol{
+    border-collapse:collapse;
+    border:1px solid black;
+}
+
+.navTable{
+    width:100%;
+    height:100%;
+}
+
+.navTable img{
+    /*May need to remove a border on the images*/
+    width:100%;
+    height:100%;
+    cursor:pointer;
+}
+
+.mainTableMapCol{
+    width:700px;
+}

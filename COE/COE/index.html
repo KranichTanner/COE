@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>COE</title>
+    <link rel="stylesheet" href="style_01.css" />
+    <script src="script_01.js"></script>
+</head>
+<body>
+
+    <div class="divBody">
+
+        <table class="mainTable"> <!--Consider making a list instead-->
+            <tr>
+                <td class="mainTableTitleBar" colspan="2">
+                    <span style="color:green">Continental </span><span style="color:blue">Oceanic </span><span style="color:red">Expansion</span>
+                </td>
+            </tr>
+            <tr class="mainTableGameArea">
+                <td class="mainTableNavCol">
+                    <table class="navTable">
+                        <tr>
+                            <td>
+                                <img onclick="mapClick()" alt="Show map" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img onclick="landsClick()" alt="Lands"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="population.html">
+                                    <img alt="Population" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img onclick="forrelClick()" alt="Foreign Relations" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img onclick="govClick()" alt="Government" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img onclick="infraClick()" alt="Infrastructure" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td id="mapCol" class="mainTableMapCol">
+                    <h2>Map Col</h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="mainTableFooter" colspan="2">
+                    <p>Footer</p>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+</html>
