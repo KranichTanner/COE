@@ -1,9 +1,0 @@
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\bin\COE.dll.config
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\bin\COE.dll
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\bin\COE.pdb
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\bin\COE.xml
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\obj\Debug\COE.Resources.resources
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\obj\Debug\COE.vbproj.GenerateResource.Cache
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\obj\Debug\COE.dll
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\obj\Debug\COE.xml
-c:\users\yanman1234\documents\visual studio 2013\Projects\COE\COE\obj\Debug\COE.pdb
