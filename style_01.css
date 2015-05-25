@@ -8,51 +8,47 @@ body{
     margin:0;
 }
 
-.divBody{
+#divBody{
     width:1024px;
     height:100%;
     margin:0px auto;
 }
 
-.mainTable{
-    width:100%;
+#titleBar{
+    background-color:black;
+    height:10%;/*Could replace with px if found to be more effective*/
+}
+
+#contentArea{
+    height:85%;/*Could replace with px if found to be more effective*/
+}
+
+#navBar{
+    background-color:red;
     height:100%;
+    width:15%;/*Could replace with px if found to be more effective*/
+    float:left;
+}
+
+.navBarItem{
+    height:16%;/*Could replace with px if found to be more effective. Seems ineffective way to show navitems, need to change if number of items on bar changes*/
     text-align:center;
-    border-collapse:collapse;
-    border:1px solid black;
 }
 
-.mainTableTitleBar{
-    font:48px arial;
-}
-
-.mainTableFooter{
-    height:5%;
-}
-
-.mainTableGameArea{
-    height:700px;
-    border-collapse:collapse;
-    border:1px solid black;
-}
-
-.mainTableNavCol{
-    border-collapse:collapse;
-    border:1px solid black;
-}
-
-.navTable{
-    width:100%;
+.navBarItem img{
+    display:block;
     height:100%;
-}
-
-.navTable img{
-    /*May need to remove a border on the images*/
     width:100%;
-    height:100%;
-    cursor:pointer;
 }
 
-.mainTableMapCol{
-    width:700px;
+#mapBar{
+    background-color:brown;
+    height:100%;
+    width:85%;/*Could replace with px if found to be more effective. Value is complement of navBar width to fill space*/
+    float:left;
+}
+
+#footerBar{
+    background-color:blue;
+    height:5%;/*Could replace with px if found to be more effective*/
 }

@@ -7,61 +7,63 @@
 </head>
 <body>
 
-    <div class="divBody">
+    <div id="divBody">
 
-        <table class="mainTable"> <!--Consider making a list instead-->
-            <tr>
-                <td class="mainTableTitleBar" colspan="2">
-                    <span style="color:green">Continental </span><span style="color:blue">Oceanic </span><span style="color:red">Expansion</span>
-                </td>
-            </tr>
-            <tr class="mainTableGameArea">
-                <td class="mainTableNavCol">
-                    <table class="navTable">
-                        <tr>
-                            <td>
-                                <img onclick="mapClick()" alt="Show map" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img onclick="landsClick()" alt="Lands"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="population.html">
-                                    <img alt="Population" />
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img onclick="forrelClick()" alt="Foreign Relations" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img onclick="govClick()" alt="Government" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img onclick="infraClick()" alt="Infrastructure" />
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td id="mapCol" class="mainTableMapCol">
-                    <h2>Map Col</h2>
-                </td>
-            </tr>
-            <tr>
-                <td class="mainTableFooter" colspan="2">
-                    <p>Footer</p>
-                </td>
-            </tr>
-        </table>
+        <div id="titleBar">
+            <span style="color:green">Continental </span><span style="color:blue">Oceanic </span><span style="color:red">Expansion</span>
+        </div>
+
+        <div id="contentArea">
+
+            <div id="navBar">
+
+                <div class="navBarItem">
+                    <a href="index.html">
+                        <img alt="Back to Map" />
+                    </a>
+                </div>
+
+                <div class="navBarItem">
+                    <a href="index.html">
+                        <img alt="Lands" />
+                    </a>
+                </div>
+
+                <div class="navBarItem">
+                    <a href="population.html">
+                        <img alt="Population" />
+                    </a>
+                </div>
+
+                <div class="navBarItem">
+                    <a href="index.html">
+                        <img alt="Foreign Relations" />
+                    </a>
+                </div>
+
+                <div class="navBarItem">
+                    <a href="index.html">
+                        <img alt="Government" />
+                    </a>
+                </div>
+
+                <div class="navBarItem">
+                    <a href="index.html">
+                        <img alt="Infrastructure" />
+                    </a>
+                </div>
+
+            </div>
+
+            <div id="mapBar">
+                Map
+            </div>
+
+        </div>
+
+        <div id="footerBar">
+            Some fine print
+        </div>
 
     </div>
 
