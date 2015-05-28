@@ -1,24 +1,17 @@
-﻿function mapClick() {
-    //Need to update map when clicked to make visible changes by other players
-    document.getElementById("mapCol").innerHTML = "MAP";
+﻿window.onload = function () {
+    for (y = 0; y < 10; y++){
+        for(x = 0; x < 10; x++){
+            paintMap(x * 50, y * 50);
+        }
+    }
 }
 
-function landsClick() {
-    document.getElementById("mapCol").innerHTML = "LANDS_DATA";
-}
+function paintMap(x, y) {
+    var ctx = document.getElementById("canvasMap").getContext("2d");
+    var mappiece = new Image();
+    mappiece.onload = function () {
 
-function popClick() {
-    document.getElementById("mapCol").innerHTML = "POPULATION_DATA";
-}
-
-function forrelClick() {
-    document.getElementById("mapCol").innerHTML = "FOREIGN_RELATIONS_DATA";
-}
-
-function govClick() {
-    document.getElementById("mapCol").innerHTML = "GOVERNMENT_DATA";
-}
-
-function infraClick() {
-    document.getElementById("mapCol").innerHTML = "INFRASTRUCTURE_DATA";
+        ctx.drawImage(mappiece, x, y);//Produces a warped image on screen, possibly due to percents in formatting
+    }
+    mappiece.src = "SampleMapSpot.png";//A 50px by 50px png image
 }

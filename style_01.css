@@ -31,7 +31,7 @@ body{
 }
 
 .navBarItem{
-    height:16%;/*Could replace with px if found to be more effective. Seems ineffective way to show navitems, need to change if number of items on bar changes*/
+    height:16%;/*Could replace with px if found to be more effective. Seems ineffective way to show navitems, need to change if number of items on bar changes. Possibility of list*/
     text-align:center;
 }
 
@@ -46,6 +46,12 @@ body{
     height:100%;
     width:85%;/*Could replace with px if found to be more effective. Value is complement of navBar width to fill space*/
     float:left;
+}
+
+#canvasMap{
+    border:1px solid blue;
+    width:100%;/*Note a small overhang on right side*/
+    height:100%;
 }
 
 #footerBar{
