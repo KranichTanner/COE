@@ -22,19 +22,21 @@ body{
     
 }
 
-#navBar{
+#navList{
+    margin:0px;
+    padding:0px;
+    text-align:center;
+    display:table;
     background-color:red;
     height:inherit;
     float:left;
 }
 
-.navBarItem{
-    height:16%;/*Could replace with px if found to be more effective. Seems ineffective way to show navitems, need to change if number of items on bar changes. Possibility of list*/
-    text-align:center;
+#navList li{
+    display:table-row;
 }
 
-.navBarItem img{
-    display:block;
+#navList img{
     height:100%;
     width:100%;
 }
