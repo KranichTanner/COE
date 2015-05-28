@@ -9,7 +9,6 @@ body{
 }
 
 #divBody{
-    width:1024px;
     height:100%;
     margin:0px auto;
 }
@@ -20,13 +19,12 @@ body{
 }
 
 #contentArea{
-    height:85%;/*Could replace with px if found to be more effective*/
+    
 }
 
 #navBar{
     background-color:red;
-    height:100%;
-    width:15%;/*Could replace with px if found to be more effective*/
+    height:inherit;
     float:left;
 }
 
@@ -43,15 +41,12 @@ body{
 
 #mapBar{
     background-color:brown;
-    height:100%;
-    width:85%;/*Could replace with px if found to be more effective. Value is complement of navBar width to fill space*/
+    height:inherit;
     float:left;
 }
 
 #canvasMap{
     border:1px solid blue;
-    width:100%;/*Note a small overhang on right side*/
-    height:100%;
 }
 
 #footerBar{

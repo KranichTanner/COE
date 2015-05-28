@@ -1,6 +1,7 @@
 ﻿window.onload = function () {
-    for (y = 0; y < 10; y++){
-        for(x = 0; x < 10; x++){
+    setComponentDim(1024, 850, 850); //A simple function to easily resize components during development
+    for (y = 0; y < 17; y++){
+        for(x = 0; x < 17; x++){
             paintMap(x * 50, y * 50);
         }
     }
@@ -14,4 +15,13 @@ function paintMap(x, y) {
         ctx.drawImage(mappiece, x, y);//Produces a warped image on screen, possibly due to percents in formatting
     }
     mappiece.src = "SampleMapSpot.png";//A 50px by 50px png image
+}
+
+function setComponentDim(bodyw, mapw, maph) {
+    document.getElementById("divBody").setAttribute("style", "width:" + bodyw + "px");
+    document.getElementById("contentArea").setAttribute("style", "height:" + maph + "px");
+    document.getElementById("navBar").setAttribute("style", "width:" + (bodyw - mapw) + "px");
+    document.getElementById("mapBar").setAttribute("style", "width:" + mapw + "px");
+    document.getElementById("canvasMap").width = mapw;
+    document.getElementById("canvasMap").height = maph;
 }
