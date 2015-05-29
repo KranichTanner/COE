@@ -1,6 +1,6 @@
 ﻿window.onload = function(){
     setComponentDim(1024, 850, 850);
-}
+};
 
 function setComponentDim(bodyw, mapw, maph) {
     document.getElementById("divBody").setAttribute("style", "width:" + bodyw + "px");

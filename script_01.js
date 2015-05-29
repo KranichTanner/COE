@@ -9,12 +9,12 @@
 
 function paintMap(x, y) {
     var ctx = document.getElementById("canvasMap").getContext("2d");
-    var mappiece = new Image();
-    mappiece.onload = function () {
+    var mapPiece = new Image();
+    mapPiece.onload = function () {
 
-        ctx.drawImage(mappiece, x, y);//Produces a warped image on screen, possibly due to percents in formatting
+        ctx.drawImage(mapPiece, x, y);//Produces a warped image on screen, possibly due to percents in formatting
     };
-    mappiece.src = "SampleMapSpot.png";//A 50px by 50px png image
+    mapPiece.src = "SampleMapSpot.png";//A 50px by 50px png image
 }
 
 function setComponentDim(bodyw, mapw, maph) {
