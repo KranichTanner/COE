@@ -55,9 +55,15 @@ body{
     position:absolute;
 }
 
+#panelArea{
+    width:1700px;
+    height:1700px;
+}
+
 .mapPanel{
     display:block;
     position:relative;
+    float:left;
     width:850px; /*Size of panel*/
     height:850px; /*Size of panel*/
 }
