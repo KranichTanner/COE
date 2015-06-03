@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="style_01.css" />
     
     <script type="text/javascript" src="script_01.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         $("a").click(function(){
@@ -17,6 +18,10 @@
     </script>
 </head>
 <body>
+
+    <!--IMPORTANT NOTE: Must set canvas dimensions here in attributes or in javascript (set in js) so that bitmap size is correct and canvas is painted accordingly. CSS only effects visual size, not bitmap-->
+    <!--Not sure if this okay formatting. IMPORTANT NOTE: Change dimensions to size of a panel.-->
+    <canvas id="canvasMap" width="850" height="850">Canvas element does not work on this current browser or browser version.</canvas>
 
     <div id="divBody">
 
@@ -60,7 +65,18 @@
             </ul>
 
             <div id="mapBar">
-              <canvas id="canvasMap">Canvas element does not work on this current browser or browser version.</canvas>
+                <script>
+                    $(function () {
+                        $("#panelArea").draggable();
+                    });
+                </script>
+
+                <div id="panelArea" class="ui-widget-content">
+                    <img class="mapPanel" id="panelA" alt="A" />
+                    <img class="mapPanel" id="panelB" alt="B" />
+                    <img class="mapPanel" id="panelC" alt="C" />
+                    <img class="mapPanel" id="panelD" alt="D" />
+                </div>
             </div>
 
         </div>

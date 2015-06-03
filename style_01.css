@@ -49,6 +49,32 @@ body{
 
 #canvasMap{
     border:1px solid blue;
+    top:-850px;
+    left:-850px;
+    position:absolute;
+}
+
+.mapPanel{
+    display:block;
+    position:relative;
+    width:850px; /*Size of panel*/
+    height:850px; /*Size of panel*/
+}
+
+#panelA{
+    background-color:aliceblue;
+}
+
+#panelB{
+    background-color:beige;
+}
+
+#panelC{
+    background-color:coral;
+}
+
+#panelD{
+    background-color:darkgreen;
 }
 
 #footerBar{
