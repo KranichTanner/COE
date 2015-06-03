@@ -1,11 +1,6 @@
 ﻿window.onload = function () {
     //mapClick();
     setComponentDim(1024, 850, 850);
-    //Not sure quite yet how to add img tags dynamically for an "infinite" sized display. This will be for the 850px display as it is.
-    getE("panelA").setAttribute("style", "top:0; left:0;");
-    getE("panelB").setAttribute("style", "top:0; left:850;");
-    getE("panelC").setAttribute("style", "top:850; left:0;");
-    getE("panelD").setAttribute("style", "top:850; left:850;");
 };
 
 // function to getElementById
@@ -30,6 +25,11 @@ function setComponentDim(bodyw, mapw, maph) {
     getE("contentArea").setAttribute("style", "height:" + maph + "px");
     getE("navList").setAttribute("style", "width:" + (bodyw - mapw) + "px");
     getE("mapBar").setAttribute("style", "width:" + mapw + "px");
+    //Not sure quite yet how to add img tags dynamically for an "infinite" sized display. This will be for the 850px display as it is.
+    getE("panelA").setAttribute("style", "top:0px; left:0px;");
+    getE("panelB").setAttribute("style", "top:0px; left:" + mapw + "px;");
+    getE("panelC").setAttribute("style", "top:" + maph + "px; left:0px;");
+    getE("panelD").setAttribute("style", "top:" + maph + "px; left:" + mapw + "px;");
 }
 
 /*function mapClick() {

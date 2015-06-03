@@ -45,6 +45,7 @@ body{
     background-color:brown;
     height:inherit;
     float:left;
+    overflow:hidden;
 }
 
 #canvasMap{
