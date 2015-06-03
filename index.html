@@ -3,16 +3,16 @@
 <head>
     <title>COE</title>
     <link rel="stylesheet" href="style_01.css" />
-    
+
     <script type="text/javascript" src="script_01.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $("a").click(function(){
-          $("#mapBar").empty();
-          var id = $(this).attr("id");
-          $("#mapBar").load(id+".html");
+        $("a").click(function(){ // when a link is clicked
+          $("#mapBar").empty(); // empty contents in mapBar
+          var id = $(this).attr("id"); // grab the id of the link
+          $("#mapBar").load(id+".html"); // load the appropriate html file
         });
       });
     </script>
