@@ -1,6 +1,15 @@
-﻿window.onload = function () {
+﻿var w = window.innerWidth   //gets window width by using a supported method of the browser
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var h = window.innerHeight  //gets window height by using a supported method of the browser
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
+
+window.onload = function () {
     //mapClick();
-    setComponentDim(1024, 850, 850);
+    //setComponentDim(w, 850, 850);
 };
 
 // function to getElementById

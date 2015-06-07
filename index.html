@@ -25,6 +25,26 @@
 
     <div id="divBody">
 
+        <!--
+            My plan is to make the map constantly up and make it the contentArea. The navList* would then be on top of this for a graphical effect, padding/margins will
+            allow the map to be visible around it slightly. Data areas will then be added to the screen in a smaller window/div (need to look into) that contains the datam.
+            Clicking another data link will just replace the contents of the current data window with that of the new datam, might do something to compare datam when 
+            clicking on an enemy and bringing up their information. This window will be closable via clicking an X or the like. Likewise, clicking the "Back to Map" link 
+            will close any window open, could possibly make it reload the map depending on later build mechanics, especially visually with structures and other dynamic 
+            changes. The footer will also likely be an overlay in that it may be shrunk in width and have some transparency.
+            Pros:
+                This will pretty much solve the reload issue, where being on a data page and pressing reload would bring you to map - we'll see when it's done, but this 
+                    will most likely have a similar effect by closing any data windows but may not and this won't be a terrible side-effect.
+                This should create a more appealing display utilizing the majority of the page and avoiding any possibility of a scrollbar except possibily in data windows
+                    which may actually make the windows look better but will see.
+                Might make popup information (clicking on enemy land and displaying brief details) more easy to implement
+            Cons:
+                Less space to display datam which may result in the use of scrollbars.
+                We'll have to redesign a decent amount of the layout and construction.
+
+            *May make navList a drop down menu to minimize its effect on the visual area, bringing spotlight to the map alone                 
+        -->
+
         <div id="titleBar">
             <span style="color:green">Continental </span><span style="color:blue">Oceanic </span><span style="color:red">Expansion</span>
         </div>

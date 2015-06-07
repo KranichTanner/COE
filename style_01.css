@@ -10,25 +10,28 @@ body{
 
 #divBody{
     height:100%;
+    width:100%;
     margin:0px auto;
 }
 
 #titleBar{
     background-color:black;
-    height:10%;/*Could replace with px if found to be more effective*/
+    height:10%;
 }
 
 #contentArea{
-
+    height:85%;
 }
 
 #navList{
     margin:0px;
+    margin-left:1%;
     padding:0px;
     text-align:center;
     display:table;
     background-color:red;
-    height:inherit;
+    width:14%;
+    height:100%;
     float:left;
 }
 
@@ -43,7 +46,8 @@ body{
 
 #mapBar{
     background-color:brown;
-    height:inherit;
+    width:85%;
+    height:100%;
     float:left;
     overflow:hidden;
 }
@@ -86,5 +90,5 @@ body{
 
 #footerBar{
     background-color:blue;
-    height:5%;/*Could replace with px if found to be more effective*/
+    height:5%;
 }
