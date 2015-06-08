@@ -30,7 +30,13 @@ function genPanel(panelid) {
 
         for (y = 0; y <= 850; y += 50) {
             for (x = 0; x <= 850; x += 50) {
-                ctx.drawImage(mapPiece2, x, y);
+                var rand = Math.round((Math.random() + 1));
+                if (rand === 1) {
+                    ctx.drawImage(mapPiece, x, y);
+                }
+                else {
+                    ctx.drawImage(mapPiece2, x, y);
+                }
             }
         }
 
