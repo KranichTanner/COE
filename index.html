@@ -8,12 +8,16 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        /*$(document).ready(function(){
             $("a").click(function () { // when a link is clicked
                 $("#mapBar").empty(); // empty contents in mapBar
                 var id = $(this).attr("id"); // grab the id of the link
                 $("#mapBar").load(id + ".html"); // load the appropriate html file
             });
+        });*/
+
+        $(function () {
+            $("#panelArea").draggable();
         });
     </script>
 </head>
@@ -84,13 +88,18 @@
                 </li>
             </ul>
 
-            <div id="mapBar">
-                <script>
-                    $(function () {
-                        $("#mapBar").load("map.html");
-                    });
-                </script>
+            <div id="panelArea" class="ui-widget-content">
+                <!--Not sure quite yet how to add img tags dynamically for an "infinite" sized display. This will be for the 850px display as it is.-->
+                <!--May want to experiment with loading the entire map on window load and see just how long it takes to see if its actually ok to load everything all the time.-->
+                <img class="mapPanel" id="panelA" onclick="genPanel(this.id)" alt="A" />
+                <img class="mapPanel" id="panelB" onclick="genPanel(this.id)" alt="B" />
+                <img class="mapPanel" id="panelC" onclick="genPanel(this.id)" alt="C" />
+                <img class="mapPanel" id="panelD" onclick="genPanel(this.id)" alt="D" />
             </div>
+
+            <!--<div id="mapBar">
+                
+            </div>-->
 
         </div>
 
