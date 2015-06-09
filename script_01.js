@@ -1,10 +1,12 @@
-﻿var w = window.innerWidth   //gets window width by using a supported method of the browser
-|| document.documentElement.clientWidth
-|| document.body.clientWidth;
+//gets window width by using a supported method of the browser
+var w = window.innerWidth||
+        document.documentElement.clientWidth||
+        document.body.clientWidth;
 
-var h = window.innerHeight  //gets window height by using a supported method of the browser
-|| document.documentElement.clientHeight
-|| document.body.clientHeight;
+//gets window height by using a supported method of the browser
+var h = window.innerHeight||
+        document.documentElement.clientHeight||
+        document.body.clientHeight;
 
 
 window.onload = function () {
@@ -18,7 +20,7 @@ function getE(id){
 }
 
 function genPanel(panelid) {
-    if (getE(panelid).src == "") {
+    if (getE(panelid).src === "") {
 
         var canvas = getE("canvasMap");
         var ctx = canvas.getContext("2d");
@@ -47,5 +49,3 @@ function genPanel(panelid) {
     }
 
 }
-
-
