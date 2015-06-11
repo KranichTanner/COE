@@ -17,7 +17,7 @@
         });*/
 
         $(function () {
-            $("#panelArea").draggable();
+            $("#panelArea, #notContainer").draggable({cancel : "#notContent, #notClose"});
         });
     </script>
 </head>
@@ -31,7 +31,7 @@
 
         <!--
             My plan is to make the map constantly up and make it the contentArea. The navList* would then be on top of this for a graphical effect, padding/margins will
-            allow the map to be visible around it slightly. Data areas will then be added to the screen in a smaller window/div (need to look into) that contains the datam.
+            allow the map to be visible around it slightly. Data areas will then be added to the screen in a smaller window/div (need to look into)** that contains the datam.
             Clicking another data link will just replace the contents of the current data window with that of the new datam, might do something to compare datam when 
             clicking on an enemy and bringing up their information. This window will be closable via clicking an X or the like. Likewise, clicking the "Back to Map" link 
             will close any window open, could possibly make it reload the map depending on later build mechanics, especially visually with structures and other dynamic 
@@ -46,7 +46,8 @@
                 Less space to display datam which may result in the use of scrollbars.
                 We'll have to redesign a decent amount of the layout and construction.
 
-            *May make navList a drop down menu to minimize its effect on the visual area, bringing spotlight to the map alone                 
+            *May make navList a drop down menu to minimize its effect on the visual area, bringing spotlight to the map alone
+            **div             
         -->
 
         <div id="titleBar">
@@ -57,34 +58,22 @@
 
             <ul id="navList">
                 <li>
-                    <a id="map" href=#>
-                        <img alt="Back to Map" />
-                    </a>
+                    <img id="map" class="dataLink" onclick="mapClick()" alt="Back to Map" />
                 </li>
                 <li>
-                    <a id="lands" href=#>
-                        <img alt="Lands" />
-                    </a>
+                    <img id="lands" class="dataLink"onclick="dataClick(this.id)" alt="Lands" />
                 </li>
                 <li>
-                    <a id="population" href=#>
-                        <img alt="Population" />
-                    </a>
+                    <img id="population" class="dataLink" onclick="dataClick(this.id)" alt="Population" />
                 </li>
                 <li>
-                    <a id="foreign_relations" href=#>
-                        <img alt="Foreign Relations" />
-                    </a>
+                    <img id="foreign_relations" class="dataLink" onclick="dataClick(this.id)" alt="Foreign Relations" />
                 </li>
                 <li>
-                    <a id="government" href=#>
-                        <img alt="Government" />
-                    </a>
+                    <img id="government" class="dataLink" onclick="dataClick(this.id)" alt="Government" />
                 </li>
                 <li>
-                    <a id="infrastructure" href=#>
-                        <img alt="Infrastructure" />
-                    </a>
+                    <img id="infrastructure" class="dataLink" onclick="dataClick(this.id)" alt="Infrastructure" />
                 </li>
             </ul>
 
@@ -97,9 +86,12 @@
                 <img class="mapPanel" id="panelD" onclick="genPanel(this.id)" alt="D" />
             </div>
 
-            <!--<div id="mapBar">
-                
-            </div>-->
+            <div id="notContainer" class="ui-widget-content">
+                <div id="notClose">
+                    <img onclick="notCloseClick()" alt="X"/>
+                </div>
+                <div id="notContent"></div>
+            </div>
 
         </div>
 

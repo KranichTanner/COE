@@ -1,4 +1,4 @@
-//gets window width by using a supported method of the browser
+﻿//gets window width by using a supported method of the browser
 var w = window.innerWidth||
         document.documentElement.clientWidth||
         document.body.clientWidth;
@@ -30,7 +30,7 @@ function genPanel(panelid) {
         var mapPiece2 = new Image();
         mapPiece2.src = "SampleMapSpot2.png";
 
-        $(document).ready(function () {//Checks if the whole document is loaded so may need to change if it's too slow, just need to see if images are loaded.
+        $(window).ready(function () {//Checks if the whole window is loaded so may need to change if it's too slow, just need to see if images are loaded.
 
             for (y = 0; y <= 850; y += 50) {
                 for (x = 0; x <= 850; x += 50) {
@@ -48,4 +48,19 @@ function genPanel(panelid) {
         });
     }
 
+}
+
+function dataClick(dataid) {
+    $("#notContent").empty();
+    $("#notContent").load(dataid + ".html");
+    getE("notContainer").setAttribute("style", "display:block; top:" + ((h / 2)-300) + "px; left:" + ((w / 2)-300) + "px;");
+
+}
+
+function notCloseClick() {
+    getE("notContainer").setAttribute("style", "display:none;");
+}
+//Yes these are the same but mapClick may expand to more functions later and better to seperate now than later
+function mapClick() {
+    getE("notContainer").setAttribute("style", "display:none;");
 }

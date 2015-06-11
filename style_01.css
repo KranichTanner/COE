@@ -32,6 +32,8 @@ body{
 }
 
 #navList{
+    z-index:3;
+
     background-color:red;
 
     width:217px;
@@ -39,7 +41,6 @@ body{
 
     position:absolute;
     left:1%;
-    z-index:2;
     margin:0px;
     padding:0px;
 
@@ -56,14 +57,45 @@ body{
     height:100%;
 }
 
-#mapBar{
-    background-color:brown;
+.dataLink{
+    cursor:pointer;
+}
 
-    width:85%;
-    height:100%;
+#notContainer{
+    z-index:2;
 
-    float:left;
-    overflow:hidden;
+    background-color:blueviolet;
+
+    width:600px;
+    height:400px;
+
+    position:absolute;
+    display:none;
+}
+
+#notClose{
+    background-color:red;
+
+    width:21px;
+    height:21px;
+
+    float:right;
+    margin:2px 2px 2px 2px;
+    text-align:center;
+}
+
+#notClose img{
+    display:inline-block;
+}
+
+#notContent{
+    background-color:orange;
+
+    width:600px;
+    height:375px;
+    
+    position:absolute;
+    top:25px;
 }
 
 #canvasMap{
