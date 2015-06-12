@@ -22,6 +22,8 @@ function getE(id){
 function genPanel(panelid) {
     if (getE(panelid).src === "") {
 
+        console.log("Panel should be painted " + new Date().toLocaleTimeString());
+
         var canvas = getE("canvasMap");
         var ctx = canvas.getContext("2d");
 
@@ -31,6 +33,8 @@ function genPanel(panelid) {
         mapPiece2.src = "SampleMapSpot2.png";
 
         $(window).ready(function () {//Checks if the whole window is loaded so may need to change if it's too slow, just need to see if images are loaded.
+
+            console.log("Images should be loaded and display correctly " + new Date().toLocaleTimeString());
 
             for (y = 0; y <= 850; y += 50) {
                 for (x = 0; x <= 850; x += 50) {
