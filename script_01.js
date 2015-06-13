@@ -8,15 +8,28 @@ var h = window.innerHeight||
         document.documentElement.clientHeight||
         document.body.clientHeight;
 
-
-window.onload = function () {
-    //mapClick();
-    //setComponentDim(w, 850, 850);
-};
-
 // function to getElementById
 function getE(id){
   return document.getElementById(id);
+}
+
+//sets images to be used to an image object, effectively loading it into the cache to preload it for later
+function preloadImages() {
+
+    imgObj = new Array();
+
+    imgSrc = new Array();
+    imgSrc[0] = "SampleMapSpot.png";
+    imgSrc[1] = "SampleMapSpot2.png";
+
+    for (x = 0; x <= 1; x++) {
+        imgObj[x] = new Image();
+        imgObj[x].src = imgSrc[x];
+
+        console.log("Image " + x + " loaded");
+
+    }
+
 }
 
 function genPanel(panelid) {
