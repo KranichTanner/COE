@@ -8,19 +8,14 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript">
-        /*$(document).ready(function(){
-            $("a").click(function () { // when a link is clicked
-                $("#mapBar").empty(); // empty contents in mapBar
-                var id = $(this).attr("id"); // grab the id of the link
-                $("#mapBar").load(id + ".html"); // load the appropriate html file
-            });
-        });*/
 
-        $.ajaxSetup({
-            //Disables AJAX elements of jquery (.load()) to cache their values. I wasn't able to alter data files and have the changes seen because of this.
-            //Can remove possibly after editting
-            cache: false
-        });
+        $(window).load(function () { console.log("Loaded: " + new Date().toLocaleTimeString()) });
+
+        /*
+         * Important Note: Some items, I found this with data pages, may become cached and display the outdated cached version instead of an updated
+         * version. If this is seen, you need to delete the cache for the page. For chrome press F12, click and hold on the reload button for a menu
+         * to appear, click the option that removes cache. After the reload the updated page should be seen.
+         */
 
         $(function () {
             $("#panelArea, #notContainer").draggable({
