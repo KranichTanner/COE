@@ -33,7 +33,7 @@ function preloadImages() {
 }
 
 function genPanel(panelid) {
-    if (getE(panelid).src === "") {
+    if (getE(panelid).style.backgroundImage === "") {
 
         console.log("Panel should be painted " + new Date().toLocaleTimeString());
 
@@ -57,7 +57,7 @@ function genPanel(panelid) {
             }
         }
 
-        $("#" + panelid).attr("src", canvas.toDataURL("image/png"));
+        $("#" + panelid).css("background-image", "url(" + canvas.toDataURL("image/png") + ")");
 
     }
 
