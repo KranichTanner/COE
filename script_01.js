@@ -16,9 +16,9 @@ function getE(id){
 //sets images to be used to an image object, effectively loading it into the cache to preload it for later
 function preloadImages() {
 
-    imgObj = new Array();
+    imgObj = [];
 
-    imgSrc = new Array();
+    imgSrc = [];
     imgSrc[0] = "SampleMapSpot.png";
     imgSrc[1] = "SampleMapSpot2.png";
 
