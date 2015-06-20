@@ -1,4 +1,4 @@
-﻿
+﻿/*index start*/
 html{
     height:100%;
 }
@@ -64,13 +64,27 @@ body{
 #notContainer{
     z-index:2;
 
-    background-color:blueviolet;
-
     width:600px;
     height:400px;
 
     position:absolute;
+    border:2px solid black; 
     display:none;
+}
+
+#notTitleBar{
+    background-color:#c1ffbc;
+
+    width:600px;
+    height:25px;
+
+    position:absolute;
+}
+
+#notTitle{
+    float:left;
+    cursor:default;
+    margin:2px 0px 0px 3px;
 }
 
 #notClose{
@@ -80,7 +94,7 @@ body{
     height:21px;
 
     float:right;
-    margin:2px 2px 2px 2px;
+    margin:0px 2px 0px 2px;
     text-align:center;
 }
 
@@ -90,13 +104,15 @@ body{
 }
 
 #notContent{
-    background-color:orange;
+    background-color:#fffded;
 
     width:600px;
     height:375px;
     
     position:absolute;
-    top:25px;
+    border-top:2px solid black;
+    border-bottom:2px solid black;
+    top:23px;
 }
 
 #canvasMap{
@@ -144,3 +160,34 @@ body{
 
     height:5%;
 }
+/*index end*/
+
+/*data start*/
+.dataCellFullWidth{
+    width:99%;
+
+    box-sizing:border-box;
+}
+
+
+
+
+
+
+/*data end*/
+
+/*land start*/
+.landCell{
+    border-radius:5px;
+    border:2px solid green;
+    margin:2px 2px 2px 2px;
+    padding:3px 3px 3px 3px;
+    float:left;
+}
+
+
+
+
+
+
+/*land end*/

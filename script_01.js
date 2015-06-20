@@ -65,6 +65,7 @@ function genPanel(panelid) {
 
 function dataClick(dataid) {
     $("#notContent").empty();
+    $("#notTitle").empty();
     $("#notContent").load(dataid + ".html");
     getE("notContainer").setAttribute("style", "display:block; top:" + ((h / 2)-300) + "px; left:" + ((w / 2)-300) + "px;");
 
