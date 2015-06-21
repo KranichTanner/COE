@@ -64,11 +64,13 @@ body{
 #notContainer{
     z-index:2;
 
+    background-color:black;
+
     width:600px;
     height:400px;
 
     position:absolute;
-    border:2px solid black; 
+    padding:2px 2px 2px 2px;
     display:none;
 }
 
@@ -107,12 +109,10 @@ body{
     background-color:#fffded;
 
     width:600px;
-    height:375px;
+    height:373px;
     
     position:absolute;
-    border-top:2px solid black;
-    border-bottom:2px solid black;
-    top:23px;
+    top:29px;
 }
 
 #canvasMap{
@@ -164,27 +164,37 @@ body{
 
 /*data start*/
 .dataCellFullWidth{
-    width:99%;
+    width:100%;
+
+    box-sizing:border-box;/*Accounts for contents, padding, and border when calculating width*/
+}
+
+.dataCellHalfWidth{
+    width:50%;
 
     box-sizing:border-box;
 }
 
-
-
-
-
-
-/*data end*/
-
-/*land start*/
-.landCell{
-    border-radius:5px;
-    border:2px solid green;
-    margin:2px 2px 2px 2px;
-    padding:3px 3px 3px 3px;
+.dataCellBorder{/*Essentially a margin for the data cells*/
+    border:2px solid transparent;
     float:left;
 }
 
+.dataCell {
+    width: 100%;
+
+    border-radius: 5px;
+    border: 2px solid green;
+    padding: 3px;
+
+    box-sizing: border-box;
+}
+/*data end*/
+
+/*land start*/
+#landAllGov{
+    font-size:16px;
+}
 
 
 
