@@ -112,6 +112,7 @@ body{
     height:373px;
     
     position:absolute;
+    overflow-y:auto;
     top:29px;
 }
 
@@ -175,12 +176,20 @@ body{
     box-sizing:border-box;
 }
 
+.dataCellThirdWidth{
+    width:33.333%;
+
+    box-sizing:border-box;
+}
+
 .dataCellBorder{/*Essentially a margin for the data cells*/
     border:2px solid transparent;
     float:left;
 }
 
 .dataCell {
+    background-color:#fffded;
+
     width: 100%;
 
     border-radius: 5px;
@@ -189,23 +198,25 @@ body{
 
     box-sizing: border-box;
 }
+
+.dataSection{
+    overflow:auto;
+}
+
+.dataSectionTitle{
+    text-align:center;
+    text-decoration:underline;
+    font-size:24px;
+}
 /*data end*/
 
 /*land start*/
 #landAllContainer{
-    border-radius:5px;
-    border:3px solid brown;
-    overflow:auto;
-}
-
-#landAllTitle{
-    text-align:center;
-    text-decoration:underline;
-    font-size:32px;
+    background-color:#e1deda;
 }
 
 #landAllGov{
-    font-size:24px;
+    font-size:20px;
 }
 
 #landAllPopCount{
@@ -232,8 +243,33 @@ body{
 
 }
 
+#landCurContainer{
+    background-color:#f5f4f3;
+}
 
+#landCurName{
 
+}
+
+#landCurCoords{
+
+}
+
+#landCurBiome{
+
+}
+
+#landCurPopCount{
+
+}
+
+#landCurHap{
+
+}
+
+#landCurStructNum{
+
+}
 
 
 /*land end*/
