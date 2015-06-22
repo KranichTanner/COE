@@ -194,7 +194,7 @@ body{
 
     overflow:auto;
     border-radius: 5px;
-    border: 2px solid green;
+    border: 2px solid #8496ac;
     padding: 3px;
 
     box-sizing: border-box;
@@ -230,6 +230,10 @@ body{
 
 #landCurContainer{
     background-color:#f5f4f3;
+}
+
+#landEachContainer{
+    background-color:#e1deda;
 }
 
 
