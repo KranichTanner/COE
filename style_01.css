@@ -192,11 +192,20 @@ body{
 
     width: 100%;
 
+    overflow:auto;
     border-radius: 5px;
     border: 2px solid green;
     padding: 3px;
 
     box-sizing: border-box;
+}
+
+.dataCellLabel{
+    float:left;
+}
+
+.dataCellData{
+    float:left;
 }
 
 .dataSection{
@@ -219,56 +228,8 @@ body{
     font-size:20px;
 }
 
-#landAllPopCount{
-
-}
-
-#landAllAvgHap{
-
-}
-
-#landAllLandCount{
-
-}
-
-#landAllTopResPro{
-
-}
-
-#landAllTopIm{
-
-}
-
-#landAllTopEx{
-
-}
-
 #landCurContainer{
     background-color:#f5f4f3;
-}
-
-#landCurName{
-
-}
-
-#landCurCoords{
-
-}
-
-#landCurBiome{
-
-}
-
-#landCurPopCount{
-
-}
-
-#landCurHap{
-
-}
-
-#landCurStructNum{
-
 }
 
 
