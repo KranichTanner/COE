@@ -1,14 +1,4 @@
-﻿//gets window width by using a supported method of the browser
-var w = window.innerWidth||
-        document.documentElement.clientWidth||
-        document.body.clientWidth;
-
-//gets window height by using a supported method of the browser
-var h = window.innerHeight||
-        document.documentElement.clientHeight||
-        document.body.clientHeight;
-
-// function to getElementById
+﻿// function to getElementById
 function getE(id){
   return document.getElementById(id);
 }
@@ -64,6 +54,17 @@ function genPanel(panelid) {
 }
 
 function dataClick(dataid) {
+
+    //gets window width by using a supported method of the browser
+    var w = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+
+    //gets window height by using a supported method of the browser
+    var h = window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight;
+
     $("#notContent").empty();
     $("#notTitle").empty();
     $("#notContent").load(dataid + ".html");

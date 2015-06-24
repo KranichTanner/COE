@@ -1,26 +1,157 @@
-Population Data
-<ul>
-    <li>
-        Total pop count of all lands
-    </li>
-    <li>
-        Pop count of current land and a percent matching how much that represents of the total pop
-    </li>
-    <li>
-        Happiness in current land
-    </li>
-    <li>
-        Form of distributing jobs (farmers, builders, etc.) - Maybe through sliders and manual entry through text fields
-        <ul>
-            <li>
-                Could also display stats about jobs (happiness value granted, money made, money lost, etc.) and proportions of people in certain jobs
-            </li>
-            <li>
-                Also demographic data would be good here - Pop poor/rich, pop homeless, pop happiness distribution, ethnicity, maybe age stats
-            </li>
-        </ul>
-    </li>
-    <li>
-        Way to host happiness boosters or events for pop - Could declare certain days holidays (making it global or local to current land), host festivals, set up offers for pop (Free hats at town hall or something)
-    </li>
-</ul>
+<script>
+    document.getElementById("notTitle").innerHTML = "Population Data";
+</script>
+
+<!--All Population-->
+<div class="dataSection dataSectionColorA">
+
+    <div class="dataSectionTitle">Population of All Lands</div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div id="popAllCount" class="dataCell">
+            <span class="dataCellLabel">Population:&nbsp</span>
+            <!--Add all population here-->
+            <span class="dataCellData" id="popAllCountData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllHighCount" class="dataCell">
+            <span class="dataCellLabel">Highest Population:&nbsp</span>
+            <!--Add all high population count and land here-->
+            <span class="dataCellData" id="popAllHighCountData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllLowCount" class="dataCell">
+            <span class="dataCellLabel">Lowest Population:&nbsp</span>
+            <!--Add all low population count and land here-->
+            <span class="dataCellData" id="popAllLowCountData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div id="popAllHapAvg" class="dataCell">
+            <span class="dataCellLabel">Average Happiness:&nbsp</span>
+            <!--Add average happiness here-->
+            <span class="dataCellData" id="popAllHapAvgData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllHighHap" class="dataCell">
+            <span class="dataCellLabel">Highest Happiness:&nbsp</span>
+            <!--Add all high happiness and land here-->
+            <span class="dataCellData" id="popAllHighHapData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllLowHap" class="dataCell">
+            <span class="dataCellLabel">Lowest Happiness:&nbsp</span>
+            <!--Add all low happiness count and land here-->
+            <span class="dataCellData" id="popAllLowHapData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div id="popAllEmploy" class="dataCell">
+            <span class="dataCellLabel">Employed:&nbsp</span>
+            <!--Add all employed (percent or part out of total) here-->
+            <span class="dataCellData" id="popAllEmployData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllHighEmploy" class="dataCell">
+            <span class="dataCellLabel">Most Employed:&nbsp</span>
+            <!--Add all high employment percent or count and land here-->
+            <span class="dataCellData" id="popAllHighEmployData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popAllLowEmploy" class="dataCell">
+            <span class="dataCellLabel">Least Employed:&nbsp</span>
+            <!--Add all low employ percent or count and land here-->
+            <span class="dataCellData" id="popAllLowEmployData"></span>
+        </div>
+    </div>
+
+</div>
+
+<div class="dataSection dataSectionColorB">
+
+    <div class="dataSectionTitle">Population of Current Land</div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popCurCount" class="dataCell">
+            <span class="dataCellLabel">Population:&nbsp</span>
+            <!--Add cur population count here-->
+            <span class="dataCellData" id="popCurCountData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellHalfWidth">
+        <div id="popCurHap" class="dataCell">
+            <span class="dataCellLabel">Happiness:&nbsp</span>
+            <!--Add cur happiness here-->
+            <span class="dataCellData" id="popCurHapData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellThirdWidth">
+        <div id="popCurEmploy" class="dataCell">
+            <span class="dataCellLabel">Employed:&nbsp</span>
+            <!--Add cur employ here-->
+            <span class="dataCellData" id="popCurEmployData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellThirdWidth">
+        <div id="popCurPubEmploy" class="dataCell">
+            <span class="dataCellLabel">Publicly Employed:&nbsp</span>
+            <!--Add cur publicly employ here-->
+            <span class="dataCellData" id="popCurPubEmployData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellThirdWidth">
+        <div id="popCurPrivEmploy" class="dataCell">
+            <span class="dataCellLabel">Privately Employed:&nbsp</span>
+            <!--Add cur privately employ here-->
+            <span class="dataCellData" id="popCurPrivEmployData"></span>
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div class="dataCell">
+            StructType..................................................................................................NumOfWorkers
+            <!--Dynamic with adding structures. Should only be one row per structure type, not per structure (ie one for Farm, not one for each farm.)-->
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div class="dataCell">
+            StructType..................................................................................................NumOfWorkers
+            <!--Dynamic with adding structures. Should only be one row per structure type, not per structure (ie one for Farm, not one for each farm.)-->
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div class="dataCell">
+            StructType..................................................................................................NumOfWorkers
+            <!--Dynamic with adding structures. Should only be one row per structure type, not per structure (ie one for Farm, not one for each farm.)-->
+        </div>
+    </div>
+
+    <div class="dataCellBorder dataCellFullWidth">
+        <div id="popCurMigWork" class="dataCell">
+            <span class="dataCellLabel">Migrant Workers:&nbsp</span>
+            <!--Add cur migrant workers for this land here-->
+            <span class="dataCellData" id="popCurMigWorkData"></span>
+        </div>
+    </div>
+
+</div>

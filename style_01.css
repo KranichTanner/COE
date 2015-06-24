@@ -212,6 +212,14 @@ body{
     overflow:auto;
 }
 
+.dataSectionColorA{
+    background-color:#e1deda;
+}
+
+.dataSectionColorB{
+    background-color:#f5f4f3;
+}
+
 .dataSectionTitle{
     text-align:center;
     text-decoration:underline;
@@ -220,20 +228,9 @@ body{
 /*data end*/
 
 /*land start*/
-#landAllContainer{
-    background-color:#e1deda;
-}
 
 #landAllGov{
     font-size:20px;
-}
-
-#landCurContainer{
-    background-color:#f5f4f3;
-}
-
-#landEachContainer{
-    background-color:#e1deda;
 }
 
 
