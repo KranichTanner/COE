@@ -27,85 +27,15 @@
 </head>
 <body onload="preloadImages()">
 
-    <!--IMPORTANT NOTE: Must set canvas dimensions here in attributes or in javascript (set in js) so that bitmap size is correct and canvas is painted accordingly. CSS only effects visual size, not bitmap-->
-    <!--Not sure if this okay formatting. IMPORTANT NOTE: Change dimensions to size of a panel.-->
-    <canvas id="canvasMap" width="850" height="850">Canvas element does not work on this current browser or browser version.</canvas>
-
-    <div id="divBody">
-
-        <!--
-            My plan is to make the map constantly up and make it the contentArea. The navList* would then be on top of this for a graphical effect, padding/margins will
-            allow the map to be visible around it slightly. Data areas will then be added to the screen in a smaller window/div (need to look into)** that contains the datam.
-            Clicking another data link will just replace the contents of the current data window with that of the new datam, might do something to compare datam when 
-            clicking on an enemy and bringing up their information. This window will be closable via clicking an X or the like. Likewise, clicking the "Back to Map" link 
-            will close any window open, could possibly make it reload the map depending on later build mechanics, especially visually with structures and other dynamic 
-            changes. The footer will also likely be an overlay in that it may be shrunk in width and have some transparency.
-            Pros:
-                This will pretty much solve the reload issue, where being on a data page and pressing reload would bring you to map - we'll see when it's done, but this 
-                    will most likely have a similar effect by closing any data windows but may not and this won't be a terrible side-effect.
-                This should create a more appealing display utilizing the majority of the page and avoiding any possibility of a scrollbar except possibily in data windows
-                    which may actually make the windows look better but will see.
-                Might make popup information (clicking on enemy land and displaying brief details) more easy to implement
-            Cons:
-                Less space to display datam which may result in the use of scrollbars.
-                We'll have to redesign a decent amount of the layout and construction.
-
-            *May make navList a drop down menu to minimize its effect on the visual area, bringing spotlight to the map alone
-            **div             
-        -->
-
-        <div id="titleBar">
-            <span style="color:green">Continental </span><span style="color:blue">Oceanic </span><span style="color:red">Expansion</span>
-        </div>
-
-        <div id="contentArea">
-
-            <ul id="navList">
-                <li>
-                    <img id="map" class="dataLink" onclick="mapClick()" alt="Back to Map" />
-                </li>
-                <li>
-                    <img id="lands" class="dataLink"onclick="dataClick(this.id)" alt="Lands" />
-                </li>
-                <li>
-                    <img id="population" class="dataLink" onclick="dataClick(this.id)" alt="Population" />
-                </li>
-                <li>
-                    <img id="foreign_relations" class="dataLink" onclick="dataClick(this.id)" alt="Foreign Relations" />
-                </li>
-                <li>
-                    <img id="government" class="dataLink" onclick="dataClick(this.id)" alt="Government" />
-                </li>
-                <li>
-                    <img id="infrastructure" class="dataLink" onclick="dataClick(this.id)" alt="Infrastructure" />
-                </li>
-            </ul>
-
-            <div id="panelArea" class="ui-widget-content">
-                <!--May want to experiment with loading the entire map on window load and see just how long it takes to see if its actually ok to load everything all the time.-->
-                <div class="mapPanel" id="panelA" onclick="genPanel(this.id)">A</div>
-                <div class="mapPanel" id="panelB" onclick="genPanel(this.id)">B</div>
-                <div class="mapPanel" id="panelC" onclick="genPanel(this.id)">C</div>
-                <div class="mapPanel" id="panelD" onclick="genPanel(this.id)">D</div>
-            </div>
-
-            <div id="notContainer" class="ui-widget-content">
-                <div id="notTitleBar">
-                    <div id="notTitle"></div>
-                    <div id="notClose">
-                        <img onclick="notCloseClick()" alt="X"/>
-                    </div>
-                </div>
-                <div id="notContent"></div>
-            </div>
-
-        </div>
-
-        <div id="footerBar">
-            Some fine print
-        </div>
-
+    <div>
+        <span>Username:&nbsp</span>
+        <input id="username"/>
     </div>
+    <div>
+        <span>Password:&nbsp&nbsp</span>
+        <input id="password"/>
+    </div>
+    <button onclick="logIn(username.value, password.value)">Submit</button>
 
 </body>
 </html>
