@@ -24,7 +24,7 @@
             <div class="regArea">
                 <div class="regLabel">New User?</div>
                 <div class="regData">
-                    <div class="regDataLine"></div>
+                    <div id="regNot" class="regDataLine"></div>
                     <div class="regDataLine">
                         <div class="dataLabel">Username:</div>
                         <input id="regUsername" />
@@ -37,7 +37,7 @@
                         <div class="dataLabel">Email:</div>
                         <input id="regEmail" />
                     </div>
-                    <button class="regButton">Register!</button>
+                    <button class="regButton" onclick="register(regUsername.value, regPassword.value, regEmail.value)">Register!</button>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
             <div class="regArea">
                 <div class="regLabel">Existing User?</div>
                 <div class="regData">
-                    <div class="regDataLine"></div>
+                    <div id="logInNot" class="regDataLine"></div>
                     <div class="regDataLine">
                         <div class="dataLabel">Username:</div>
                         <input id="logUsername" />

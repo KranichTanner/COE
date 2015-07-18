@@ -21,6 +21,46 @@ io.on("connection", function (socket) {
         console.log("User has disconnected.");
     });
     
+    socket.on("regAttempt", function (username, password, email) {
+
+        connection.query("SELECT * FROM users WHERE email = '" + email + "'", function (err, rows, fields) {
+            if (err) {
+                throw err;
+            }
+            else {
+                if (rows.length === 0) {
+                    connection.query("SELECT * FROM users WHERE username = '" + username + "'", function (err, rows, fields) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            if (rows.length === 0) {
+                                connection.query("INSERT INTO users (username, password, email, timemade, lastlogin) VALUES ('" + username + "', '" + password + "', '" + email + "', 0, 0)", function (err, rows, fields) {
+                                    if (err) {
+                                        throw err;
+                                    }
+                                    else {
+                                        console.log("Registration Successful!");
+                                        socket.emit("regSuccess");
+                                    }
+                                });
+                            }
+                            else {
+                                console.log("Registration Fail!");
+                                socket.emit("regFail", "Given username is already taken!");
+                            }
+                        }
+                    });
+                }
+                else {
+                    console.log("Registration Fail!");
+                    socket.emit("regFail", "Given email already has an account!");
+                }
+            }
+        });
+
+    });
+
     socket.on("loginAttempt", function (username, password) {
         connection.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'", function (err, rows, fields) {
             if (err) {
@@ -28,22 +68,15 @@ io.on("connection", function (socket) {
             }
             else {
                 if (rows.length === 0) {
-                    socket.emit("loginSuccess", false);
+                    console.log("Login Fail!");
+                    socket.emit("loginFail", "Username or Password incorrect!");
                 }
                 else {
-                    socket.emit("loginSuccess", true);
+                    console.log("Login Successful!");
+                    socket.emit("loginSuccess");
                 }
             }
         });
-    });
-    
-    socket.on("loginSuccess", function () {
-        console.log("Login Successful!")
-    });
-    
-    socket.on("loginFail", function () { 
-        console.log("Login Fail!");
-        socket.emit("loginFail");
     });
 
     socket.on("landAllGovData", function () {
