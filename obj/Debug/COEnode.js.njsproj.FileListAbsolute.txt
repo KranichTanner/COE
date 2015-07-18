@@ -1,0 +1,2 @@
+C:\Users\yanman1234\documents\visual studio 2013\Projects\COEnode.js\COEnode.js\obj\Debug\COEnode.js.njsprojResolveAssemblyReference.cache
+C:\Users\yanman1234\documents\visual studio 2013\Projects\COEnode.js\COEnode.js\bin\Microsoft.NodejsTools.WebRole.dll

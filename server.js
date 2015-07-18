@@ -1,20 +1,40 @@
 ﻿var app = require("express")();
+var mysql = require("mysql");
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
+
+var connection = mysql.createConnection({
+    host: "127.0.0.1",
+    port: "6000",
+    user: "root",
+    password: "root",
+    database: "coe"
+});
+
+console.log("Connected to database");
 
 io.on("connection", function (socket) {
     console.log("User has connected");
 
     socket.on("disconnect", function (socket) {
+        connection.end();
         console.log("User has disconnected.");
     });
     
-    socket.on("loginUsername", function (data) {
-        socket.emit("loginPassword", true);
-    });
-    
-    socket.on("loginPassword", function (data) { 
-        socket.emit("loginSuccess", true);
+    socket.on("loginAttempt", function (username, password) {
+        connection.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'", function (err, rows, fields) {
+            if (err) {
+                throw err;
+            }
+            else {
+                if (rows.length === 0) {
+                    socket.emit("loginSuccess", false);
+                }
+                else {
+                    socket.emit("loginSuccess", true);
+                }
+            }
+        });
     });
     
     socket.on("loginSuccess", function () {

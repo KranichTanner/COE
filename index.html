@@ -16,26 +16,60 @@
          * version. If this is seen, you need to delete the cache for the page. For chrome press F12, click and hold on the reload button for a menu
          * to appear, click the option that removes cache. After the reload the updated page should be seen.
          */
-
-        $(function () {
-            $("#panelArea, #notContainer").draggable({
-                cancel: "#notContent, #notClose",
-                //containment will stop items from being dragged outside a bound or element, but this drag field has to be larger than the dragged element to prevent strange behavior
-            });
-        });
     </script>
 </head>
 <body onload="preloadImages()">
+    <div id="divBody">
+        <div id="loginUpperContainer">
+            <div class="regArea">
+                <div class="regLabel">New User?</div>
+                <div class="regData">
+                    <div class="regDataLine"></div>
+                    <div class="regDataLine">
+                        <div class="dataLabel">Username:</div>
+                        <input id="regUsername" />
+                    </div>
+                    <div class="regDataLine">
+                        <div class="dataLabel">Password:</div>
+                        <input id="regPassword" />
+                    </div>
+                    <div class="regDataLine">
+                        <div class="dataLabel">Email:</div>
+                        <input id="regEmail" />
+                    </div>
+                    <button class="regButton">Register!</button>
+                </div>
+            </div>
 
-    <div>
-        <span>Username:&nbsp</span>
-        <input id="username"/>
-    </div>
-    <div>
-        <span>Password:&nbsp&nbsp</span>
-        <input id="password"/>
-    </div>
-    <button onclick="logIn(username.value, password.value)">Submit</button>
+            <div id="loginLargeLogoContainer">
+                <img id="loginLargeLogo" alt="Login Large Logo" />
+            </div>
 
+            <div class="regArea">
+                <div class="regLabel">Existing User?</div>
+                <div class="regData">
+                    <div class="regDataLine"></div>
+                    <div class="regDataLine">
+                        <div class="dataLabel">Username:</div>
+                        <input id="logUsername" />
+                    </div>
+                    <div class="regDataLine">
+                        <div class="dataLabel">Password:</div>
+                        <input id="logPassword" />
+                    </div>
+                    <button class="regButton" onclick="logIn(logUsername.value, logPassword.value)">Log In!</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameDesc">
+            Description of Game
+        </div>
+
+        <div id="gameUpdates">
+            Updates
+        </div>
+
+    </div>
 </body>
 </html>
