@@ -3,7 +3,7 @@
 <head>
     <title>COE</title>
     <link rel="stylesheet" href="style_01.css" />
-    
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="script_01.js"></script>
@@ -27,15 +27,15 @@
                     <div id="regNot" class="regDataLine"></div>
                     <div class="regDataLine">
                         <div class="dataLabel">Username:</div>
-                        <input id="regUsername" />
+                        <input type = "text" id="regUsername" />
                     </div>
                     <div class="regDataLine">
                         <div class="dataLabel">Password:</div>
-                        <input id="regPassword" />
+                        <input id="regPassword" type="password"/>
                     </div>
                     <div class="regDataLine">
                         <div class="dataLabel">Email:</div>
-                        <input id="regEmail" />
+                        <input type="text" id="regEmail" />
                     </div>
                     <button class="regButton" onclick="register(regUsername.value, regPassword.value, regEmail.value)">Register!</button>
                 </div>
@@ -51,11 +51,11 @@
                     <div id="logInNot" class="regDataLine"></div>
                     <div class="regDataLine">
                         <div class="dataLabel">Username:</div>
-                        <input id="logUsername" />
+                        <input id="logUsername" type="text" />
                     </div>
                     <div class="regDataLine">
                         <div class="dataLabel">Password:</div>
-                        <input id="logPassword" />
+                        <input id="logPassword" type="password"/>
                     </div>
                     <button class="regButton" onclick="logIn(logUsername.value, logPassword.value)">Log In!</button>
                 </div>
