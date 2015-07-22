@@ -95,12 +95,12 @@ body{
     background-color:#f4ffe0;
 
     width:100%;
-    height:300px;
+    height:auto;
 }
 
 #gameUpdates{
     width:100%;
-    height:100%;
+    height:auto;
 }
 /*index end*/
 
