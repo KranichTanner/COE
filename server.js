@@ -4,6 +4,7 @@ var http = require("http").Server(app);
 var io = require("socket.io")(http);
 
 var connection = mysql.createConnection({
+    multipleStatements: true,
     host: "127.0.0.1",
     port: "6000",
     user: "root",
@@ -36,6 +37,8 @@ io.on("connection", function (socket) {
                         else {
                             if (rows.length === 0) {
                                 register(username, password, email);
+                                console.log("Registration Success!");
+                                socket.emit("regSuccess");
                             }
                             else {
                                 console.log("Registration Fail!");
@@ -85,9 +88,11 @@ http.listen(3000, function () {
 //Helper functions
 
 function register(username, password, email){
+    //Insert user data into users table
     connection.query("INSERT INTO users (username, password, email, timemade, lastlogin) VALUES ('" + username + "', '" + password + "', '" + email + "', 0, 0)", function (err) {//Need madetime/last log time
         if (err) throw err;
     });
+    //Find a random land with at least one open neighbor spot and make a land there, starts creating land
     connection.query("SELECT * FROM lands WHERE neighbor < 4 ORDER BY Rand() LIMIT 1", function (err, rows) {
         if (err) {
             throw err;
@@ -100,9 +105,8 @@ function register(username, password, email){
                     throw err;
                 }
                 else {
-                    console.log("Hoods1");
                     if (rows.length === 0) {
-                        addLand(username, x + 1, y);
+                        addLand(username, x + 1, y, 5);
                     }
                     else {
                         connection.query("SELECT * FROM lands WHERE xcoord = '" + (x - 1) + "' AND ycoord = '" + y + "'", function (err, rows) {
@@ -110,9 +114,8 @@ function register(username, password, email){
                                 throw err;
                             }
                             else {
-                                console.log("Hoods2");
                                 if (rows.length === 0) {
-                                    addLand(username, x - 1, y);
+                                    addLand(username, x - 1, y, 5);
                                 }
                                 else {
                                     connection.query("SELECT * FROM lands WHERE xcoord = '" + x + "' AND ycoord = '" + (y + 1) + "'", function (err, rows) {
@@ -120,9 +123,8 @@ function register(username, password, email){
                                             throw err;
                                         }
                                         else {
-                                            console.log("Hoods3");
                                             if (rows.length === 0) {
-                                                addLand(username, x, y + 1);
+                                                addLand(username, x, y + 1, 5);
                                             }
                                             else {
                                                 connection.query("SELECT * FROM lands WHERE xcoord = '" + x + "' AND ycoord = '" + (y - 1) + "'", function (err, rows) {
@@ -130,10 +132,9 @@ function register(username, password, email){
                                                         throw err;
                                                     }
                                                     else {
-                                                        console.log("Hoods4");
                                                         if (rows.length === 0) {
                                                             placed = true;
-                                                            addLand(username, x, y - 1);
+                                                            addLand(username, x, y - 1, 5);
                                                         }
                                                     }
                                                 });
@@ -148,10 +149,10 @@ function register(username, password, email){
             });
         }
     });
-
 }
 
-function addLand(username, x, y){
+function addLand(username, x, y, population){
+    //Give a biome to new land through percent weighting of available biomes
     var biome = Math.floor((Math.random() * 100) + 1);
     if (biome <= 10) {
         biome = "Desert";
@@ -169,6 +170,7 @@ function addLand(username, x, y){
         biome = "???";
     }
     
+    //Check neighbors of new land and update neighbor value for current land and neighbor found
     var n = 0;
     var done = 0;
     connection.query("SELECT * FROM lands WHERE xcoord = '" + (x + 1) + "' AND ycoord = '" + y + "'", function (err, rows) {
@@ -181,7 +183,6 @@ function addLand(username, x, y){
                 connection.query("UPDATE lands SET neighbor = neighbor + 1 WHERE idlands = " + rows[0].idlands + "", function (err) {
                     if (err) throw err;
                 });
-                console.log("Goods1");
             }
         }
         ++done;
@@ -197,7 +198,6 @@ function addLand(username, x, y){
                 connection.query("UPDATE lands SET neighbor = neighbor + 1 WHERE idlands = " + rows[0].idlands + "", function (err) {
                     if (err) throw err;
                 });
-                console.log("Goods2");
             }
         }
         ++done;
@@ -213,7 +213,6 @@ function addLand(username, x, y){
                 connection.query("UPDATE lands SET neighbor = neighbor + 1 WHERE idlands = " + rows[0].idlands + "", function (err) {
                     if (err) throw err;
                 });
-                console.log("Goods3");
             }
         }
         ++done;
@@ -229,33 +228,34 @@ function addLand(username, x, y){
                 connection.query("UPDATE lands SET neighbor = neighbor + 1 WHERE idlands = " + rows[0].idlands + "", function (err) {
                     if (err) throw err;
                 });
-                console.log("Goods4");
             }
         }
         ++done;
         insertLand();
     });
     
+    //Executed once all 4 neighbor checks have returned
     function insertLand() {
         if (done === 4) {
-            connection.query("INSERT INTO lands(name, xcoord, ycoord, biome, population, happiness, buildSpots, neighbor) VALUES('" + username + "s Land', " + x + ", " + y + ", '" + biome + "', 5, 50, 3, " + n + ")", function (err, rows) {
+            //Inserts new land into lands table
+            connection.query("INSERT INTO lands(name, xcoord, ycoord, biome, buildSpots, neighbor) VALUES('" + username + "s Land', " + x + ", " + y + ", '" + biome + "', 3, " + n + "); SELECT LAST_INSERT_ID()", function (err, rows) {
                 if (err) {
                     throw err
                 }
                 else {
-                    connection.query("SELECT * FROM users WHERE username = '" + username + "'", function (err, rows) {
+                    //Gets user to associate with land
+                    connection.query("SELECT * FROM users WHERE username = '" + username + "'", function (err, rows2) {
                         if (err) {
                             throw err;
                         }
                         else {
-                            connection.query("SELECT * FROM lands WHERE xcoord = " + x + " AND ycoord = " + y + "", function (err, rows2) {
+                            //Add user/land relation to userslands table
+                            connection.query("INSERT INTO userslands(iduser, idlands) VALUES(" + rows2[0].iduser + ", " + rows[0].insertId + ")", function (err) {
                                 if (err) {
                                     throw err;
                                 }
                                 else {
-                                    connection.query("INSERT INTO userslands(iduser, idlands) VALUES(" + rows[0].iduser + ", " + rows2[0].idlands + ")", function (err) {
-                                        if (err) throw err;
-                                    });
+                                    addPopulation(rows[0].insertId, population);
                                 }
                             });
                         }
@@ -266,8 +266,18 @@ function addLand(username, x, y){
     };
 }
 
-/*else{
-console.log("Registration Success!");
-socket.emit("regSuccess");
-}*/
+function addPopulation(idlands, count) {
+    //Insert new population into population table
+    connection.query("INSERT INTO population(count, happiness, employed, privEmployed, pubEmployed, migWorkers) VALUES(" + count + ", 50, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            //Connect land to population through landspopulation table
+            connection.query("INSERT INTO landspopulation(idlands, idpopulation) VALUES(" + idlands + ", " + rows[0].insertId + ")", function (err) {
+                if (err) throw err;
+            });
+        }
+    });
+}
 
