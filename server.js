@@ -22,6 +22,7 @@ io.on("connection", function (socket) {
         console.log("User has disconnected.");
     });
     
+    //User attempting to register a new account
     socket.on("regAttempt", function (username, password, email) {
 
         connection.query("SELECT * FROM users WHERE email = '" + email + "'", function (err, rows, fields) {
@@ -55,7 +56,8 @@ io.on("connection", function (socket) {
         });
 
     });
-
+    
+    //User attempting to login with preexisting account, iduser returned to client
     socket.on("loginAttempt", function (username, password) {
         connection.query("SELECT * FROM users WHERE username = '" + username + "' AND password = '" + password + "'", function (err, rows) {
             if (err) {
@@ -68,15 +70,15 @@ io.on("connection", function (socket) {
                 }
                 else {
                     console.log("Login Successful!");
-                    socket.emit("loginSuccess");
+                    socket.emit("loginSuccess", rows[0].iduser);
                 }
             }
         });
     });
 
-    socket.on("landAllGovData", function () {
+    socket.on("landClick", function (iduser) {
         console.log("Land button clicked...");
-        io.emit("landAllGovData", "Democracy");
+        landClick(iduser, socket);
     });
 
 });
@@ -151,6 +153,7 @@ function register(username, password, email){
     });
 }
 
+//Adds a land to user, sets current land to this new land.
 function addLand(username, x, y, population){
     //Give a biome to new land through percent weighting of available biomes
     var biome = Math.floor((Math.random() * 100) + 1);
@@ -258,6 +261,9 @@ function addLand(username, x, y, population){
                                     addPopulation(rows[0].insertId, population);
                                 }
                             });
+                            connection.query("UPDATE users SET curridlands = " + rows[0].insertId + " WHERE iduser = " + rows2[0].iduser + "", function (err) { 
+                                if (err) throw err;
+                            });
                         }
                     });
                 }
@@ -281,3 +287,46 @@ function addPopulation(idlands, count) {
     });
 }
 
+
+
+
+
+
+function landClick(iduser, socket){
+    //landAllGov
+
+    //landAllPopCount
+    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            var totpop = 0;
+            var done = 0;
+            for (x = 0; x < rows.length; ++x) {
+                connection.query("SELECT * FROM landspopulation WHERE idlands = " + rows[x].idlands + "", function (err, rows) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        connection.query("SELECT * FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
+                            if (err) {
+                                throw err;
+                            }
+                            else {
+                                totpop += rows[0].count;
+                                ++done;
+                                postCount(done);
+                            }
+
+                        });
+                    }
+                });
+            }
+            function postCount(done){
+                socket.emit("displayData", "landAllPopCountData", totpop);
+            };
+        }
+    });
+
+}
