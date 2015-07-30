@@ -22,6 +22,12 @@ function preloadImages() {
 
 }
 
+function makeDraggable() {
+    $("#panelArea, #notContainer").draggable({
+        cancel: "#notContent, #notClose",
+    });
+}
+
 function genPanel(panelid) {
     if (getE(panelid).style.backgroundImage === "") {
 

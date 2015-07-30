@@ -8,13 +8,12 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="script_01.js"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>  <!--change localhost to website name, 3000 is port node is listening to-->
+    <script type="text/javascript" src="cookie.js"></script>
     <script type="text/javascript" src="comm.js"></script>
     <script type="text/javascript">
 
-        $("#panelArea, #notContainer").draggable({
-            cancel: "#notContent, #notClose",
-        });
-
+        
+        
         /*
          * Important Note: Some items, I found this with data pages, may become cached and display the outdated cached version instead of an updated
          * version. If this is seen, you need to delete the cache for the page. For chrome press F12, click and hold on the reload button for a menu
@@ -22,7 +21,7 @@
          */
     </script>
 </head>
-<body>
+<body onload="preloadImages(); makeDraggable()">
 
     <!--IMPORTANT NOTE: Must set canvas dimensions here in attributes or in javascript (set in js) so that bitmap size is correct and canvas is painted accordingly. CSS only effects visual size, not bitmap-->
     <!--Not sure if this okay formatting. IMPORTANT NOTE: Change dimensions to size of a panel.-->

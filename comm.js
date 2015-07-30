@@ -1,5 +1,4 @@
 ﻿var socket = io.connect("http://localhost:3000");
-var iduser;
 
 function register() {
     //document.getElementById("regNot").innerHTML = "";
@@ -11,13 +10,12 @@ function register() {
     }
 }
 
-function logIn() {
-    
-        socket.emit("loginAttempt", $("#logUsername").val(), $("#logPassword").val());
-    
+function logIn() {    
+    socket.emit("loginAttempt", $("#logUsername").val(), $("#logPassword").val());    
 }
 
 function landClick() {
+    var iduser = docCookies.getItem("iduser");
     socket.emit("landClick", iduser);
 }
 
@@ -33,17 +31,11 @@ socket.on("regFail", function (data) {
 
 //Login listeners
 socket.on("loginSuccess", function (idu) {
-    iduser = idu;
-    
-    window.alert();
+
+    idu = idu + 0;
+    docCookies.setItem("iduser", idu);
+
     window.location.href = "game.html";
-    
-    /*$("body").empty();
-    $("body").load("game.html", function () {
-        $("#panelArea, #notContainer").draggable({
-            cancel: "#notContent, #notClose",
-        });
-    });*/
 });
 
 socket.on("loginFail", function (data) {

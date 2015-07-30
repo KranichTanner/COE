@@ -16,11 +16,6 @@ console.log("Connected to database");
 
 io.on("connection", function (socket) {
     console.log("User has connected");
-
-    socket.on("disconnect", function (socket) {
-        connection.end();
-        console.log("User has disconnected.");
-    });
     
     //User attempting to register a new account
     socket.on("regAttempt", function (username, password, email) {
@@ -79,6 +74,14 @@ io.on("connection", function (socket) {
     socket.on("landClick", function (iduser) {
         console.log("Land button clicked...");
         landClick(iduser, socket);
+    });
+    
+    socket.on('error', function (err) {
+        console.error(err.stack);
+    });
+
+    socket.on("disconnect", function (socket) {
+        console.log("User has disconnected.");
     });
 
 });
@@ -324,6 +327,7 @@ function landClick(iduser, socket){
                 });
             }
             function postCount(done){
+                console.log("PopCount emitted");
                 socket.emit("displayData", "landAllPopCountData", totpop);
             };
         }
