@@ -326,11 +326,153 @@ function landClick(iduser, socket){
                     }
                 });
             }
-            function postCount(done){
+            function postCount(done) {
                 console.log("PopCount emitted");
                 socket.emit("displayData", "landAllPopCountData", totpop);
             };
         }
     });
 
+    //landAllAvgHapData
+    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            var tothap = 0;
+            var done = 0;
+            for (x = 0; x < rows.length; ++x) {
+                connection.query("SELECT * FROM landspopulation WHERE idlands = " + rows[x].idlands + "", function (err, rows) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        connection.query("SELECT * FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
+                            if (err) {
+                                throw err;
+                            }
+                            else {
+                                tothap += rows[0].happiness;
+                                ++done;
+                                postCount(done);
+                            }
+
+                        });
+                    }
+                });
+            }
+            function postCount(done) {
+                console.log("AvgHap emitted");
+                socket.emit("displayData", "landAllAvgHapData", (tothap / done) + "%");
+            };
+        }
+    });
+
+    //landAllLandCountData
+    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+                console.log("TotLands emitted");
+                socket.emit("displayData", "landAllLandCountData", rows.length);
+        }
+    });
+
+    //landAllTopResProData
+
+    //landAllTopImData
+
+    //landAllTopExData 
+
+    //landCurData
+    connection.query("SELECT curridlands FROM users WHERE iduser = " + iduser + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {//currid else
+            
+            var currid = rows[0].curridlands;
+            //landCurNameData
+            connection.query("SELECT name FROM lands WHERE idlands = " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    console.log("CurrLandName emitted");
+                    socket.emit("displayData", "landCurNameData", rows[0].name);
+                }
+            });
+            //landCurCoordsData
+            connection.query("SELECT * FROM lands WHERE idlands = " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    console.log("CurrCoords emitted");
+                    socket.emit("displayData", "landCurCoordsData", "X: " + rows[0].xcoord + " &emsp;Y: " + rows[0].ycoord);
+                }
+            });
+
+            //landCurBiomeData
+            connection.query("SELECT biome FROM lands WHERE idlands = " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    console.log("CurrBiome emitted");
+                    socket.emit("displayData", "landCurBiomeData", rows[0].biome);
+                }
+            });
+
+            //landCurPopData
+            connection.query("SELECT * FROM landspopulation WHERE idlands = " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {//currpop else
+                    //landCurPopCountData
+                    connection.query("SELECT count FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            console.log("CurrCount emitted");
+                            socket.emit("displayData", "landCurPopCountData", rows[0].count);
+                        }
+                    });
+                    
+                    //landCurHapData
+                    connection.query("SELECT happiness FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            console.log("CurrHap emitted");
+                            socket.emit("displayData", "landCurHapData", rows[0].happiness + "%");
+                        }
+                    });
+                }//currpop else
+            });
+
+            //landCurStructNumData
+            connection.query("SELECT * FROM landsstructures WHERE idlands = " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    connection.query("SELECT buildSpots FROM lands WHERE idlands = " + currid + "", function (err, rows2) {
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            console.log("CurrStructCount emitted");
+                            socket.emit("displayData", "landCurStructNumData", rows.length + "/" + rows2[0].buildSpots);
+                        }
+                    });
+                }
+            });
+
+        }//currid else
+    });
 }
