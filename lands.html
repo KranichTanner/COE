@@ -3,225 +3,177 @@
 </script>
 
 <!--All Lands-->
-<div class="dataSection dataSectionColorA">
+<div id="landBodyDiv">
 
-    <div class="dataSectionTitle">All Land Data</div><!--Perhaps change with an "empire" name-->
+    <div class="dataSection dataSectionColorA">
 
-    <div class="dataCellBorder dataCellFullWidth">
-        <div id="landAllGov" class="dataCell">
-            <span class="dataCellLabel">Government:&nbsp</span>
-            <!--Add all land government here-->
-            <span class="dataCellData" id="landAllGovData"></span>
+        <div class="dataSectionTitle">All Land Data</div><!--Perhaps change with an "empire" name-->
+
+        <div class="dataCellBorder dataCellFullWidth">
+            <div id="landAllGov" class="dataCell">
+                <span class="dataCellLabel">Government:&nbsp</span>
+                <!--Add all land government here-->
+                <span class="dataCellData" id="landAllGovData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landAllPopCount" class="dataCell">
-            <span class="dataCellLabel">Population:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landAllPopCount" class="dataCell">
+                <span class="dataCellLabel">Population:&nbsp</span>
                 <!--Add all population count here-->
-            <span class="dataCellData" id="landAllPopCountData"></span>
+                <span class="dataCellData" id="landAllPopCountData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landAllAvgHap" class="dataCell">
-            <span class="dataCellLabel">Average Happiness:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landAllAvgHap" class="dataCell">
+                <span class="dataCellLabel">Average Happiness:&nbsp</span>
                 <!--Add all average happiness (Could be just a percent unless width is changed) here-->
-            <span class="dataCellData" id="landAllAvgHapData"></span>
+                <span class="dataCellData" id="landAllAvgHapData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landAllLandCount" class="dataCell">
-            <span class="dataCellLabel">Total Lands:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landAllLandCount" class="dataCell">
+                <span class="dataCellLabel">Total Lands:&nbsp</span>
                 <!--Add all land count here-->
-            <span class="dataCellData" id="landAllLandCountData"></span>
+                <span class="dataCellData" id="landAllLandCountData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellFullWidth">
-        <div id="landAllTopResPro" class="dataCell">
-            <span class="dataCellLabel">Top Resource Produced:&nbsp</span>
+        <div class="dataCellBorder dataCellFullWidth">
+            <div id="landAllTopResPro" class="dataCell">
+                <span class="dataCellLabel">Top Resource Produced:&nbsp</span>
                 <!--Add all top resource produced here-->
-            <span class="dataCellData" id="landAllTopResProData"></span>
+                <span class="dataCellData" id="landAllTopResProData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div id="landAllTopIm" class="dataCell">
-            <span class="dataCellLabel">Top Import:&nbsp</span>
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div id="landAllTopIm" class="dataCell">
+                <span class="dataCellLabel">Top Import:&nbsp</span>
                 <!--Add all top import here-->
-            <span class="dataCellData" id="landAllTopImData"></span>
+                <span class="dataCellData" id="landAllTopImData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div id="landAllTopEx" class="dataCell">
-            <span class="dataCellLabel">Top Export:&nbsp</span>
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div id="landAllTopEx" class="dataCell">
+                <span class="dataCellLabel">Top Export:&nbsp</span>
                 <!--Add all top export here-->
-            <span class="dataCellData" id="landAllTopExData"></span>
+                <span class="dataCellData" id="landAllTopExData"></span>
+            </div>
         </div>
+
     </div>
 
-</div>
+    <!--Current Land-->
+    <div class="dataSection dataSectionColorB">
+        <div class="dataSectionTitle">Current Land Data</div><!--Maybe change to the current land's name-->
 
-<!--Current Land-->
-<div class="dataSection dataSectionColorB">
-    <div class="dataSectionTitle">Current Land Data</div><!--Maybe change to the current land's name-->
-    
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div id="landCurName" class="dataCell">
-            <span class="dataCellLabel">Land Name:&nbsp</span>
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div id="landCurName" class="dataCell">
+                <span class="dataCellLabel">Land Name:&nbsp</span>
                 <!--Add cur name here-->
-            <span class="dataCellData" id="landCurNameData"></span>
+                <span class="dataCellData" id="landCurNameData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div id="landCurCoords" class="dataCell">
-            <span class="dataCellLabel">Coordinates:&nbsp</span>
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div id="landCurCoords" class="dataCell">
+                <span class="dataCellLabel">Coordinates:&nbsp</span>
                 <!--Add cur coords here-->
-            <span class="dataCellData" id="landCurCoordsData"></span>
+                <span class="dataCellData" id="landCurCoordsData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellFullWidth">
-        <div id="landCurBiome" class="dataCell">
-            <span class="dataCellLabel">Biome:&nbsp</span>
+        <div class="dataCellBorder dataCellFullWidth">
+            <div id="landCurBiome" class="dataCell">
+                <span class="dataCellLabel">Biome:&nbsp</span>
                 <!--Add cur biome here-->
-            <span class="dataCellData" id="landCurBiomeData"></span>
+                <span class="dataCellData" id="landCurBiomeData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landCurPopCount" class="dataCell">
-            <span class="dataCellLabel">Population:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landCurPopCount" class="dataCell">
+                <span class="dataCellLabel">Population:&nbsp</span>
                 <!--Add cur pop count here-->
-            <span class="dataCellData" id="landCurPopCountData"></span>
+                <span class="dataCellData" id="landCurPopCountData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landCurHap" class="dataCell">
-            <span class="dataCellLabel">Happiness:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landCurHap" class="dataCell">
+                <span class="dataCellLabel">Happiness:&nbsp</span>
                 <!--Add cur happiness here (Label and percent)-->
-            <span class="dataCellData" id="landCurHapData"></span>
+                <span class="dataCellData" id="landCurHapData"></span>
+            </div>
         </div>
-    </div>
 
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div id="landCurStructNum" class="dataCell">
-            <span class="dataCellLabel">Structures:&nbsp</span>
+        <div class="dataCellBorder dataCellThirdWidth">
+            <div id="landCurStructNum" class="dataCell">
+                <span class="dataCellLabel">Structures:&nbsp</span>
                 <!--Add cur structure number here-->
-            <span class="dataCellData" id="landCurStructNumData"></span>
+                <span class="dataCellData" id="landCurStructNumData"></span>
+            </div>
         </div>
+
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div class="dataCell">
+                Structure being built 1..............Time left
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div class="dataCell">
+                Structure being built 2..............Time left
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div class="dataCell">
+                Structure being built 3..............Time left
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div class="dataCell">
+                Structure built 1..LvL..Cond..TotWorkers
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellHalfWidth">
+            <div class="dataCell">
+                Structure built 2..LvL..Cond..TotWorkers
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellFullWidth">
+            <div class="dataCell">
+                Resource1..............................................................Amount1..AmountGained/LostPerTick
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
+        <div class="dataCellBorder dataCellFullWidth">
+            <div class="dataCell">
+                Resource2..............................................................Amount2..AmountGained/LostPerTick
+                <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
+            </div>
+        </div>
+
     </div>
 
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Structure being built 1..............Time left
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Structure being built 2..............Time left
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Structure being built 3..............Time left
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Structure built 1..LvL..Cond..TotWorkers
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Structure built 2..LvL..Cond..TotWorkers
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellFullWidth">
-        <div class="dataCell">
-            Resource1..............................................................Amount1..AmountGained/LostPerTick
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellFullWidth">
-        <div class="dataCell">
-            Resource2..............................................................Amount2..AmountGained/LostPerTick
-            <!--Structures being built and already need to be dynamically added. This is an example for a slight feel of looks but is temporary-->
-        </div>
-    </div>
+    <!--Each Land--> <!--This is a completely dynamic section which won't exist if the user only has one land. Below is just sample for looks-->
 
 </div>
-
-<!--Each Land--> <!--This is a completely dynamic section which won't exist if the user only has one land. Below is just sample for looks-->
-<div class="dataSection dataSectionColorA">
-
-    <div class="dataSectionTitle">Other Land Data</div>
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div class="dataCell">
-            Name:
-        </div>        
-    </div>
-
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div class="dataCell">
-            Coords:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellThirdWidth">
-        <div class="dataCell">
-            Biome:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Population:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Happiness:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellFullWidth">
-        <div class="dataCell">
-            Top Produced Resource:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Top Import:
-        </div>
-    </div>
-
-    <div class="dataCellBorder dataCellHalfWidth">
-        <div class="dataCell">
-            Top Export:
-        </div>
-    </div>
-
-</div>
-
-<script>    //Server communication goes here
+<script>
+    //Server communication goes here
     landClick();
 </script>

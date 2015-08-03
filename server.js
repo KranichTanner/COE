@@ -362,8 +362,10 @@ function landClick(iduser, socket){
                 });
             }
             function postCount(done) {
-                console.log("AvgHap emitted");
-                socket.emit("displayData", "landAllAvgHapData", (tothap / done) + "%");
+                if (done === rows.length - 1) {
+                    console.log("AvgHap emitted");
+                    socket.emit("displayData", "landAllAvgHapData", (tothap / done) + "%");
+                }
             };
         }
     });
@@ -470,6 +472,71 @@ function landClick(iduser, socket){
                             socket.emit("displayData", "landCurStructNumData", rows.length + "/" + rows2[0].buildSpots);
                         }
                     });
+
+                    //Structure being built
+                    //Structure built
+                    //Resources
+
+                }
+            });
+
+            connection.query("SELECT * FROM userslands WHERE idlands <> " + currid + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    if (rows.length !== 0) {
+                        for (x = 0; x < rows.length; ++x) {//Need to tell client to display additional land block with data
+                            var name, xcoord, ycoord, biome, pop, hap, topres, topim, topex;
+                            var done = 0;
+                            connection.query("SELECT * FROM lands WHERE idlands = " + rows[x].idlands + "", function (err, rows) {//Get land
+                                if (err) {
+                                    throw err;
+                                }
+                                else {
+                                    name = rows[0].name;
+                                    xcoord = rows[0].xcoord;
+                                    ycoord = rows[0].ycoord;
+                                    biome = rows[0].biome;
+                                    ++done;
+
+                                    connection.query("SELECT idpopulation FROM landspopulation WHERE idlands = " + rows[0].idlands + "", function (err, rows) {//Get population
+                                        if (err) {
+                                            throw err;
+                                        }
+                                        else {
+                                            connection.query("SELECT * FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
+                                                pop = rows[0].count;
+                                                hap = rows[0].happiness;
+                                                ++done;
+                                                displayExtraLand(done);
+                                            });
+                                        }
+                                    });
+                                    //topres
+                                    topres = "NA";
+                                    ++done;
+                                    displayExtraLand(done);
+                                    //topim
+                                    topim = "NA";
+                                    ++done;
+                                    displayExtraLand(done);
+                                    //topex
+                                    topex = "NA";
+                                    ++done;
+                                    displayExtraLand(done);
+
+                                    function displayExtraLand(done){
+                                        if (done === 5) {
+                                            console.log("Extra Land emitted" + x);
+                                            socket.emit("displayExtraLand", name, xcoord, ycoord, biome, pop, hap, topres, topim, topex, x);
+                                        }
+                                    };
+
+                                }
+                            });
+                        }
+                    }
                 }
             });
 

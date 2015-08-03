@@ -9,10 +9,9 @@ function preloadImages() {
     imgObj = [];
 
     imgSrc = [];
-    imgSrc[0] = "SampleMapSpot.png";
-    imgSrc[1] = "SampleMapSpot2.png";
+    imgSrc[0] = "DesertSpot.png";
 
-    for (x = 0; x <= 1; x++) {
+    for (x = 0; x <= 0; x++) {
         imgObj[x] = new Image();
         imgObj[x].src = imgSrc[x];
 
@@ -33,7 +32,7 @@ function genPanel(panelid) {
 
         console.log("Panel should be painted " + new Date().toLocaleTimeString());
 
-        var canvas = getE("canvasMap");
+        /*var canvas = getE("canvasMap");
         var ctx = canvas.getContext("2d");
 
         var mapPiece = new Image();
@@ -51,9 +50,11 @@ function genPanel(panelid) {
                     ctx.drawImage(mapPiece2, x, y);
                 }
             }
-        }
+        }*/
 
-        $("#" + panelid).css("background-image", "url(" + canvas.toDataURL("image/png") + ")");
+        //$("#" + panelid).css("background-image", "url(" + canvas.toDataURL("image/png") + ")");
+
+        $("#" + panelid).css("background-image", "url(DesertSpot.png)");
 
     }
 

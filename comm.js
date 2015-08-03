@@ -44,7 +44,23 @@ socket.on("loginFail", function (data) {
 //Login listeners
 
 //Land listeners
+socket.on("displayExtraLand", function (name, xcoord, ycoord, biome, pop, hap, topres, topim, topex, color) {//Appends each other land to land notBox, first is denoted by color = 1
+    if (color === 1) {
+        $("#landBodyDiv").append('<div class="dataSection dataSectionColorA"><div class="dataSectionTitle">Other Land Data</div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Name: ' + name + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Coords: X: ' + xcoord + ' &emsp;Y: ' + ycoord + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Biome: ' + biome + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Population: ' + pop + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Happiness: ' + hap + '</div></div><div class="dataCellBorder dataCellFullWidth"><div class="dataCell">Top Produced Resource: ' + topres + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Import: ' + topim + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Export: ' + topex + '</div></div></div>');
+    }
+    else if (color % 2 === 1) {
+        $("#landBodyDiv").append('<div class="dataSection dataSectionColorA"><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Name: ' + name + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Coords: X: ' + xcoord + ' &emsp;Y: ' + ycoord + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Biome: ' + biome + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Population: ' + pop + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Happiness: ' + hap + '</div></div><div class="dataCellBorder dataCellFullWidth"><div class="dataCell">Top Produced Resource: ' + topres + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Import: ' + topim + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Export: ' + topex + '</div></div></div>');
+    }
+    else {
+        $("#landBodyDiv").append('<div class="dataSection dataSectionColorB"><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Name: ' + name + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Coords: X: ' + xcoord + ' &emsp;Y: ' + ycoord + '</div></div><div class="dataCellBorder dataCellThirdWidth"><div class="dataCell">Biome: ' + biome + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Population: ' + pop + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Happiness: ' + hap + '</div></div><div class="dataCellBorder dataCellFullWidth"><div class="dataCell">Top Produced Resource: ' + topres + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Import: ' + topim + '</div></div><div class="dataCellBorder dataCellHalfWidth"><div class="dataCell">Top Export: ' + topex + '</div></div></div>');
+    }
+});
+//Land listeners
+
+
+
+//General listeners
 socket.on("displayData", function (elem, data) {
     document.getElementById(elem).innerHTML = data;
 });
-//Land listeners
+//General listeners
