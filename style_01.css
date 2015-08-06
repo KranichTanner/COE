@@ -224,6 +224,22 @@ body{
 /*data end*/
 
 /*land start*/
+.addStrBtnBg{
+    width: 100%;
+
+    overflow:auto;
+    border-radius: 5px;
+    border: 2px solid #8496ac;
+
+    box-sizing: border-box;
+}
+
+#addStructBtn{
+    width:100%;
+    height:3em;
+
+    border-radius: 5px;
+}
 
 #landAllGov{
     font-size:20px;
