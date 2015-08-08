@@ -21,11 +21,7 @@
          */
     </script>
 </head>
-<body onload="preloadImages(); makeDraggable()">
-
-    <!--IMPORTANT NOTE: Must set canvas dimensions here in attributes or in javascript (set in js) so that bitmap size is correct and canvas is painted accordingly. CSS only effects visual size, not bitmap-->
-    <!--Not sure if this okay formatting. IMPORTANT NOTE: Change dimensions to size of a panel.-->
-    <canvas id="canvasMap" width="850" height="850">Canvas element does not work on this current browser or browser version.</canvas>
+<body onload="preloadImages(); makeDraggable(); loadMap()">
 
     <!--
         My plan is to make the map constantly up and make it the contentArea. The navList* would then be on top of this for a graphical effect, padding/margins will
@@ -76,12 +72,8 @@
             </li>
         </ul>
 
-        <div id="panelArea" class="ui-widget-content">
-            <!--May want to experiment with loading the entire map on window load and see just how long it takes to see if its actually ok to load everything all the time.-->
-            <div class="mapPanel" id="panelA" onclick="genPanel(this.id)">A</div>
-            <div class="mapPanel" id="panelB" onclick="genPanel(this.id)">B</div>
-            <div class="mapPanel" id="panelC" onclick="genPanel(this.id)">C</div>
-            <div class="mapPanel" id="panelD" onclick="genPanel(this.id)">D</div>
+        <div id="mapArea" class="ui-widget-content"><!--Map here-->
+            <div class="mapPanel" id="homeLand"></div>
         </div>
 
         <div id="notContainer" class="ui-widget-content">

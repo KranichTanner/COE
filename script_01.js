@@ -22,42 +22,9 @@ function preloadImages() {
 }
 
 function makeDraggable() {
-    $("#panelArea, #notContainer").draggable({
+    $("#mapArea, #notContainer").draggable({
         cancel: "#notContent, #notClose",
     });
-}
-
-function genPanel(panelid) {
-    if (getE(panelid).style.backgroundImage === "") {
-
-        console.log("Panel should be painted " + new Date().toLocaleTimeString());
-
-        /*var canvas = getE("canvasMap");
-        var ctx = canvas.getContext("2d");
-
-        var mapPiece = new Image();
-        mapPiece.src = "SampleMapSpot.png";
-        var mapPiece2 = new Image();
-        mapPiece2.src = "SampleMapSpot2.png";
-
-        for (y = 0; y <= 850; y += 50) {
-            for (x = 0; x <= 850; x += 50) {
-                var rand = Math.round((Math.random() + 1));
-                if (rand === 1) {
-                    ctx.drawImage(mapPiece, x, y);
-                }
-                else {
-                    ctx.drawImage(mapPiece2, x, y);
-                }
-            }
-        }*/
-
-        //$("#" + panelid).css("background-image", "url(" + canvas.toDataURL("image/png") + ")");
-
-        $("#" + panelid).css("background-image", "url(DesertSpot.png)");
-
-    }
-
 }
 
 function dataClick(dataid) {

@@ -19,7 +19,7 @@ body{
 }
 
 #contentArea{
-    background-color:yellow;
+    background-color:lightgray;
 
     height:85%;
 
@@ -120,36 +120,19 @@ body{
     position:absolute;
 }
 
-#panelArea{
+#mapArea{
     z-index:1;
 
-    width:1700px;
-    height:1700px;
-}
-
-.mapPanel{
-    width:850px; /*Size of panel*/
-    height:850px; /*Size of panel*/
-
-    display:block;
-    position:relative;
+    overflow:auto;
     float:left;
 }
 
-#panelA{
-    background-color:aliceblue;
-}
+.mapPanel{
+    width:800px; /*Size of panel*/
+    height:800px; /*Size of panel*/
 
-#panelB{
-    background-color:beige;
-}
-
-#panelC{
-    background-color:coral;
-}
-
-#panelD{
-    background-color:darkgreen;
+    position:relative;
+    float:left;
 }
 
 #footerBar{

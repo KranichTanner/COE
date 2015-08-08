@@ -70,6 +70,11 @@ io.on("connection", function (socket) {
             }
         });
     });
+    
+    socket.on("loadMap", function (iduser) {
+        console.log("Loading map...");
+        loadMap(iduser, socket);
+    });
 
     socket.on("landClick", function (iduser) {
         console.log("Land button clicked...");
@@ -94,7 +99,7 @@ http.listen(3000, function () {
 
 function register(username, password, email){
     //Insert user data into users table
-    connection.query("INSERT INTO users (username, password, email, timemade, lastlogin) VALUES ('" + username + "', '" + password + "', '" + email + "', 0, 0)", function (err) {//Need madetime/last log time
+    connection.query("INSERT INTO users (username, password, email, timemade, lastlogin) VALUES ('" + username + "', '" + password + "', '" + email + "', 0, 0)", function (err) {//TODO Need madetime/last log time
         if (err) throw err;
     });
     //Find a random land with at least one open neighbor spot and make a land there, starts creating land
@@ -292,7 +297,25 @@ function addPopulation(idlands, count) {
 
 
 
-
+function loadMap(iduser, socket){
+    //Get current land biome and send back to client
+    connection.query("SELECT curridlands FROM users WHERE iduser = " + iduser + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            connection.query("SELECT biome FROM lands WHERE idlands = " + rows[0].curridlands + "", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    console.log("Map loaded");
+                    socket.emit("loadMap", rows[0].biome);
+                }
+            });
+        }
+    });
+}
 
 
 function landClick(iduser, socket){
@@ -381,11 +404,11 @@ function landClick(iduser, socket){
         }
     });
 
-    //landAllTopResProData
+    //TODO landAllTopResProData
 
-    //landAllTopImData
+    //TODO landAllTopImData
 
-    //landAllTopExData 
+    //TODO landAllTopExData 
 
     //landCurData
     connection.query("SELECT curridlands FROM users WHERE iduser = " + iduser + "", function (err, rows) {
@@ -473,9 +496,9 @@ function landClick(iduser, socket){
                         }
                     });
 
-                    //Structure being built
-                    //Structure built
-                    //Resources
+                    //TODO Structure being built
+                    //TODO Structure built
+                    //TODO Resources
 
                 }
             });
@@ -486,7 +509,7 @@ function landClick(iduser, socket){
                 }
                 else {
                     if (rows.length !== 0) {
-                        for (x = 0; x < rows.length; ++x) {//Need to tell client to display additional land block with data
+                        for (x = 0; x < rows.length; ++x) {
                             var name, xcoord, ycoord, biome, pop, hap, topres, topim, topex;
                             var done = 0;
                             connection.query("SELECT * FROM lands WHERE idlands = " + rows[x].idlands + "", function (err, rows) {//Get land
@@ -513,22 +536,22 @@ function landClick(iduser, socket){
                                             });
                                         }
                                     });
-                                    //topres
+                                    //TODO topres
                                     topres = "NA";
                                     ++done;
                                     displayExtraLand(done);
-                                    //topim
+                                    //TODO topim
                                     topim = "NA";
                                     ++done;
                                     displayExtraLand(done);
-                                    //topex
+                                    //TODO topex
                                     topex = "NA";
                                     ++done;
                                     displayExtraLand(done);
 
                                     function displayExtraLand(done){
                                         if (done === 5) {
-                                            console.log("Extra Land emitted" + x);
+                                            console.log("Extra Land emitted");
                                             socket.emit("displayExtraLand", name, xcoord, ycoord, biome, pop, hap, topres, topim, topex, x);
                                         }
                                     };

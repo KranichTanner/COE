@@ -14,6 +14,11 @@ function logIn() {
     socket.emit("loginAttempt", $("#logUsername").val(), $("#logPassword").val());    
 }
 
+function loadMap() {
+    var iduser = docCookies.getItem("iduser");
+    socket.emit("loadMap", iduser);
+}
+
 function landClick() {
     var iduser = docCookies.getItem("iduser");
     socket.emit("landClick", iduser);
@@ -42,6 +47,25 @@ socket.on("loginFail", function (data) {
     //document.getElementById("logInNot").innerHTML = data;
 });
 //Login listeners
+
+//Map listeners
+socket.on("loadMap", function (HLBiome) {
+
+    //gets window width by using a supported method of the browser
+    var w = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+
+    //gets window height by using a supported method of the browser
+    var h = window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight;
+
+    document.getElementById("homeLand").style.backgroundImage = "url('" + HLBiome + "Spot.png')";
+    document.getElementById("mapArea").style.top = ((h / 2) - 472) + "px";
+    document.getElementById("mapArea").style.left = ((w / 2) - 400) + "px";
+});
+//Map listeners
 
 //Land listeners
 socket.on("displayExtraLand", function (name, xcoord, ycoord, biome, pop, hap, topres, topim, topex, color) {//Appends each other land to land notBox, first is denoted by color = 1
