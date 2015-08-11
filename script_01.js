@@ -10,8 +10,9 @@ function preloadImages() {
 
     imgSrc = [];
     imgSrc[0] = "DesertSpot.png";
+    imgSrc[1] = "ForestSpot.png";
 
-    for (x = 0; x <= 0; x++) {
+    for (x = 0; x < imgSrc.length; x++) {
         imgObj[x] = new Image();
         imgObj[x].src = imgSrc[x];
 
@@ -51,5 +52,19 @@ function notCloseClick() {
 }
 //Yes these are the same but mapClick may expand to more functions later and better to seperate now than later
 function mapClick() {
-    getE("notContainer").setAttribute("style", "display:none;");
+
+    //gets window width by using a supported method of the browser
+    var w = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+
+    //gets window height by using a supported method of the browser
+    var h = window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight;
+
+    getE("notContainer").style.display = "none";
+    //centers map on homeLand
+    document.getElementById("mapArea").style.top = ((h / 2) - 472) + "px";
+    document.getElementById("mapArea").style.left = ((w / 2) - 400) + "px";
 }

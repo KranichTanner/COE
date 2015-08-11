@@ -1,4 +1,4 @@
-﻿var socket = io.connect("http://localhost:3000");
+﻿var socket = io.connect("http://76.24.39.132:3000");
 
 function register() {
     //document.getElementById("regNot").innerHTML = "";
@@ -62,6 +62,7 @@ socket.on("loadMap", function (HLBiome) {
             document.body.clientHeight;
 
     document.getElementById("homeLand").style.backgroundImage = "url('" + HLBiome + "Spot.png')";
+    //centers map on homeLand
     document.getElementById("mapArea").style.top = ((h / 2) - 472) + "px";
     document.getElementById("mapArea").style.left = ((w / 2) - 400) + "px";
 });

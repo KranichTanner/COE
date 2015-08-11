@@ -5,7 +5,7 @@ var io = require("socket.io")(http);
 
 var connection = mysql.createConnection({
     multipleStatements: true,
-    host: "127.0.0.1",
+    host: "localhost",
     port: "6000",
     user: "root",
     password: "root",
@@ -282,7 +282,7 @@ function addLand(username, x, y, population){
 
 function addPopulation(idlands, count) {
     //Insert new population into population table
-    connection.query("INSERT INTO population(count, happiness, employed, privEmployed, pubEmployed, migWorkers) VALUES(" + count + ", 50, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
+    connection.query("INSERT INTO population(count, totcount, happiness, employed, privEmployed, pubEmployed, migWorkers) VALUES(" + count + ", 5, 50, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
         if (err) {
             throw err;
         }
@@ -385,7 +385,7 @@ function landClick(iduser, socket){
                 });
             }
             function postCount(done) {
-                if (done === rows.length - 1) {
+                if (done === rows.length) {
                     console.log("AvgHap emitted");
                     socket.emit("displayData", "landAllAvgHapData", (tothap / done) + "%");
                 }
