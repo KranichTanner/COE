@@ -24,6 +24,11 @@ function landClick() {
     socket.emit("landClick", iduser);
 }
 
+function populationClick() {
+    var iduser = docCookies.getItem("iduser");
+    socket.emit("populationClick", iduser);
+}
+
 //Reg listeners
 socket.on("regSuccess", function () {
     //document.getElementById("regNot").innerHTML = "Registration Successful!";

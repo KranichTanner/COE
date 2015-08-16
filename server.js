@@ -81,6 +81,11 @@ io.on("connection", function (socket) {
         landClick(iduser, socket);
     });
     
+    socket.on("populationClick", function (iduser) {
+        console.log("Population button clicked...");
+        populationClick(iduser, socket);
+    });
+    
     socket.on('error', function (err) {
         console.error(err.stack);
     });
@@ -267,6 +272,7 @@ function addLand(username, x, y, population){
                                 }
                                 else {
                                     addPopulation(rows[0].insertId, population);
+                                    addStorage(rows[0].insertId);
                                 }
                             });
                             connection.query("UPDATE users SET curridlands = " + rows[0].insertId + " WHERE iduser = " + rows2[0].iduser + "", function (err) { 
@@ -278,19 +284,56 @@ function addLand(username, x, y, population){
             });
         }
     };
-}
+}//addLand
 
 function addPopulation(idlands, count) {
-    //Insert new population into population table
-    connection.query("INSERT INTO population(count, totcount, happiness, employed, privEmployed, pubEmployed, migWorkers) VALUES(" + count + ", 5, 50, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
+    //Insert new population into population table with land connection
+    connection.query("SELECT * FROM landspopulation WHERE idlands = " + idlands + "", function (err, rows) {
         if (err) {
             throw err;
         }
         else {
-            //Connect land to population through landspopulation table
-            connection.query("INSERT INTO landspopulation(idlands, idpopulation) VALUES(" + idlands + ", " + rows[0].insertId + ")", function (err) {
-                if (err) throw err;
-            });
+            if (rows.length === 0) {
+                connection.query("INSERT INTO population(count, happiness, employed, privEmployed, pubEmployed, migWorkers) VALUES(" + count + ", 50, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        connection.query("INSERT INTO landspopulation(idlands, idpopulation) VALUES(" + idlands + ", " + rows[0].insertId + ")", function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                });
+            }
+            else {
+                console.log("ERROR: land " + idlands + " already has a population");
+            }
+        }
+    });
+}
+
+function addStorage(idlands){
+    //Insert new storage into storage table with land connection
+    connection.query("SELECT * FROM landsstorage WHERE idlands = " + idlands + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            if (rows.length === 0) {
+                connection.query("INSERT INTO storage(food, totfood, water, totwater, stone, totstone, wood, totwood, fiber, totfiber, dirt, totdirt, metal, totmetal, oil, totoil, electricity, totelectricity, precmetal, totprecmetal) VALUES(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); SELECT LAST_INSERT_ID()", function (err, rows) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        connection.query("INSERT INTO landsstorage(idlands, idstorage) VALUES(" + idlands + ", " + rows[0].insertId + ")", function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                });
+            }
+            else {
+                console.log("ERROR: land " + idlands + " already has a storage");
+            }
         }
     });
 }
@@ -299,20 +342,13 @@ function addPopulation(idlands, count) {
 
 function loadMap(iduser, socket){
     //Get current land biome and send back to client
-    connection.query("SELECT curridlands FROM users WHERE iduser = " + iduser + "", function (err, rows) {
+    connection.query("SELECT biome FROM lands WHERE idlands IN (SELECT curridlands FROM users WHERE iduser = " + iduser + ")", function (err, rows) {
         if (err) {
             throw err;
         }
         else {
-            connection.query("SELECT biome FROM lands WHERE idlands = " + rows[0].curridlands + "", function (err, rows) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    console.log("Map loaded");
-                    socket.emit("loadMap", rows[0].biome);
-                }
-            });
+            console.log("Map loaded");
+            socket.emit("loadMap", rows[0].biome);
         }
     });
 }
@@ -320,87 +356,25 @@ function loadMap(iduser, socket){
 
 function landClick(iduser, socket){
     //landAllGov
-
-    //landAllPopCount
-    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
+    
+    //Get all lands associated with iduser
+    connection.query("SELECT * FROM population WHERE idpopulation IN (SELECT idpopulation FROM landspopulation WHERE idlands IN (SELECT idlands FROM userslands WHERE iduser = " + iduser + "))", function (err, rows) {
         if (err) {
             throw err;
         }
         else {
             var totpop = 0;
-            var done = 0;
-            for (x = 0; x < rows.length; ++x) {
-                connection.query("SELECT * FROM landspopulation WHERE idlands = " + rows[x].idlands + "", function (err, rows) {
-                    if (err) {
-                        throw err;
-                    }
-                    else {
-                        connection.query("SELECT * FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
-                            if (err) {
-                                throw err;
-                            }
-                            else {
-                                totpop += rows[0].count;
-                                ++done;
-                                postCount(done);
-                            }
-
-                        });
-                    }
-                });
-            }
-            function postCount(done) {
-                console.log("PopCount emitted");
-                socket.emit("displayData", "landAllPopCountData", totpop);
-            };
-        }
-    });
-
-    //landAllAvgHapData
-    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
-        if (err) {
-            throw err;
-        }
-        else {
             var tothap = 0;
-            var done = 0;
             for (x = 0; x < rows.length; ++x) {
-                connection.query("SELECT * FROM landspopulation WHERE idlands = " + rows[x].idlands + "", function (err, rows) {
-                    if (err) {
-                        throw err;
-                    }
-                    else {
-                        connection.query("SELECT * FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
-                            if (err) {
-                                throw err;
-                            }
-                            else {
-                                tothap += rows[0].happiness;
-                                ++done;
-                                postCount(done);
-                            }
-
-                        });
-                    }
-                });
+                totpop += rows[0].count;
+                tothap += rows[0].happiness;
             }
-            function postCount(done) {
-                if (done === rows.length) {
-                    console.log("AvgHap emitted");
-                    socket.emit("displayData", "landAllAvgHapData", (tothap / done) + "%");
-                }
-            };
-        }
-    });
-
-    //landAllLandCountData
-    connection.query("SELECT * FROM userslands WHERE iduser = " + iduser + "", function (err, rows) {
-        if (err) {
-            throw err;
-        }
-        else {
-                console.log("TotLands emitted");
-                socket.emit("displayData", "landAllLandCountData", rows.length);
+            //landAllPopCount
+            socket.emit("displayData", "landAllPopCountData", totpop);
+            //landAllAvgHapData
+            socket.emit("displayData", "landAllAvgHapData", (tothap / rows.length) + "%");
+            //landAllLandCountData
+            socket.emit("displayData", "landAllLandCountData", rows.length);
         }
     });
 
@@ -418,69 +392,37 @@ function landClick(iduser, socket){
         else {//currid else
             
             var currid = rows[0].curridlands;
-            //landCurNameData
-            connection.query("SELECT name FROM lands WHERE idlands = " + currid + "", function (err, rows) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    console.log("CurrLandName emitted");
-                    socket.emit("displayData", "landCurNameData", rows[0].name);
-                }
-            });
-            //landCurCoordsData
             connection.query("SELECT * FROM lands WHERE idlands = " + currid + "", function (err, rows) {
                 if (err) {
                     throw err;
                 }
                 else {
-                    console.log("CurrCoords emitted");
-                    socket.emit("displayData", "landCurCoordsData", "X: " + rows[0].xcoord + " &emsp;Y: " + rows[0].ycoord);
-                }
-            });
+                    //landCurNameData
+                    socket.emit("displayData", "landCurNameData", rows[0].name);
 
-            //landCurBiomeData
-            connection.query("SELECT biome FROM lands WHERE idlands = " + currid + "", function (err, rows) {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    console.log("CurrBiome emitted");
+                    //landCurCoordsData
+                    socket.emit("displayData", "landCurCoordsData", "X: " + rows[0].xcoord + " &emsp;Y: " + rows[0].ycoord);
+
+                    //landCurBiomeData
                     socket.emit("displayData", "landCurBiomeData", rows[0].biome);
                 }
             });
 
             //landCurPopData
-            connection.query("SELECT * FROM landspopulation WHERE idlands = " + currid + "", function (err, rows) {
+            connection.query("SELECT * FROM population WHERE idpopulation IN (SELECT idpopulation FROM landspopulation WHERE idlands = " + currid + ")", function (err, rows) {
                 if (err) {
                     throw err;
                 }
-                else {//currpop else
+                else {
                     //landCurPopCountData
-                    connection.query("SELECT count FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
-                        if (err) {
-                            throw err;
-                        }
-                        else {
-                            console.log("CurrCount emitted");
-                            socket.emit("displayData", "landCurPopCountData", rows[0].count);
-                        }
-                    });
-                    
-                    //landCurHapData
-                    connection.query("SELECT happiness FROM population WHERE idpopulation = " + rows[0].idpopulation + "", function (err, rows) {
-                        if (err) {
-                            throw err;
-                        }
-                        else {
-                            console.log("CurrHap emitted");
-                            socket.emit("displayData", "landCurHapData", rows[0].happiness + "%");
-                        }
-                    });
-                }//currpop else
-            });
+                    socket.emit("displayData", "landCurPopCountData", rows[0].count);
 
-            //landCurStructNumData
+                    //landCurHapData
+                    socket.emit("displayData", "landCurHapData", rows[0].happiness + "%");
+                }
+            });
+            
+            //Gets all structures associated with curr land
             connection.query("SELECT * FROM landsstructures WHERE idlands = " + currid + "", function (err, rows) {
                 if (err) {
                     throw err;
@@ -491,7 +433,7 @@ function landClick(iduser, socket){
                             throw err;
                         }
                         else {
-                            console.log("CurrStructCount emitted");
+                            //landCurStructNumData
                             socket.emit("displayData", "landCurStructNumData", rows.length + "/" + rows2[0].buildSpots);
                         }
                     });
@@ -551,8 +493,7 @@ function landClick(iduser, socket){
 
                                     function displayExtraLand(done){
                                         if (done === 5) {
-                                            console.log("Extra Land emitted");
-                                            socket.emit("displayExtraLand", name, xcoord, ycoord, biome, pop, hap, topres, topim, topex, x);
+                                            socket.emit("displayExtraLand", name, xcoord, ycoord, biome, pop, hap + "%", topres, topim, topex, x);
                                         }
                                     };
 
@@ -564,5 +505,166 @@ function landClick(iduser, socket){
             });
 
         }//currid else
+    });
+}
+
+function populationClick(iduser, socket){
+    //Gets all populations associated to each land of the user
+    //TODO change other similar queries with below
+    connection.query("SELECT * FROM population WHERE idpopulation IN (SELECT idpopulation FROM landspopulation WHERE idlands IN (SELECT idlands FROM userslands WHERE iduser = " + iduser + "))", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            var totpop = 0;
+            var highpop = rows[0].count;
+            var highpopid = 0;
+            var lowpop = rows[0].count;
+            var lowpopid = 0;
+            var tothap = 0;
+            var highhap = rows[0].happiness;
+            var highhapid = 0;
+            var lowhap = rows[0].happiness;
+            var lowhapid = 0;
+            var totemp = 0;
+            var highemp = rows[0].employed;
+            var highempid = 0;
+            var lowemp = rows[0].employed;
+            var lowempid = 0;
+            
+            for (x = 0; x < rows.length; ++x) {
+                totpop += rows[x].count;
+
+                if (rows[x].count >= highpop) {
+                    highpop = rows[x].count;
+                    highpopid = rows[x].idpopulation;
+                }
+
+                if (rows[x].count <= lowpop) {
+                    lowpop = rows[x].count;
+                    lowpopid = rows[x].idpopulation;
+                }
+
+                tothap += rows[x].happiness;
+
+                if (rows[x].happiness >= highhap) {
+                    highhap = rows[x].happiness;
+                    highhapid = rows[x].idpopulation
+                }
+
+                if (rows[x].happiness <= lowhap) {
+                    lowhap = rows[x].happiness;
+                    lowhapid = rows[x].idpopulation
+                }
+
+                totemp += rows[x].employed;
+
+                if (rows[x].employed >= highemp) {
+                    highemp = rows[x].employed;
+                    highempid = rows[x].idpopulation
+                }
+                
+                if (rows[x].employed <= lowemp) {
+                    lowemp = rows[x].employed;
+                    lowempid = rows[x].idpopulation
+                }
+
+            }
+            //popAllCountData
+            socket.emit("displayData", "popAllCountData", totpop);
+
+            //popAllHighCountData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + highpopid + ")", function (err, rows) {//Gets name of land associated with highest population
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllHighCountData", highpop + "&emsp;" + rows[0].name);
+                }
+            });
+
+            //popAllLowCountData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + lowpopid + ")", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllLowCountData", lowpop + "&emsp;" + rows[0].name);
+                }
+            });
+
+            //popAllHapAvgData
+            socket.emit("displayData", "popAllHapAvgData", (tothap / rows.length) + "%");
+
+            //popAllHighHapData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + highhapid + ")", function (err, rows) {//Gets name of land associated with highest population
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllHighHapData", highhap + "&emsp;" + rows[0].name);
+                }
+            });
+            
+            //popAllLowHapData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + lowhapid + ")", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllLowHapData", lowhap + "&emsp;" + rows[0].name);
+                }
+            });
+
+            //popAllEmployData
+            socket.emit("displayData", "popAllEmployData", totemp);
+            
+            //popAllHighEmployData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + highempid + ")", function (err, rows) {//Gets name of land associated with highest population
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllHighEmployData", highemp + "&emsp;" + rows[0].name);
+                }
+            });
+            
+            //popAllLowEmployData
+            connection.query("SELECT name FROM lands WHERE idlands IN (SELECT idlands FROM landspopulation WHERE idpopulation = " + lowempid + ")", function (err, rows) {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    socket.emit("displayData", "popAllLowEmployData", lowemp + "&emsp;" + rows[0].name);
+                }
+            });
+
+        }
+    });
+
+    //Gets current population
+    connection.query("SELECT * FROM population WHERE idpopulation IN (SELECT idpopulation FROM landspopulation WHERE idlands IN (SELECT curridlands FROM users WHERE iduser = " + iduser + "))", function (err, rows) {
+        if (err) {
+            throw err
+        }
+        else {
+            //popCurCountData
+            socket.emit("displayData", "popCurCountData", rows[0].count);
+
+            //popCurHapData
+            socket.emit("displayData", "popCurHapData", rows[0].happiness);
+
+            //popCurEmployData
+            socket.emit("displayData", "popCurEmployData", rows[0].employed);
+
+            //popCurPubEmployData
+            socket.emit("displayData", "popCurPubEmployData", rows[0].pubEmployed);
+
+            //popCurPrivEmployData
+            socket.emit("displayData", "popCurPrivEmployData", rows[0].privEmployed);
+
+            //popCurMigWorkData
+            socket.emit("displayData", "popCurMigWorkData", rows[0].migWorkers);
+        }
     });
 }
