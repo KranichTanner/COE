@@ -1,4 +1,4 @@
-﻿var socket = io.connect("http://76.24.39.132:3000");
+﻿var socket = io.connect("127.0.0.1:3000"); //IP and Port of server location
 
 function register() {
     //document.getElementById("regNot").innerHTML = "";
@@ -66,8 +66,10 @@ socket.on("loadMap", function (HLBiome) {
             document.documentElement.clientHeight ||
             document.body.clientHeight;
 
+    //Sets land's biome image as background image
     document.getElementById("homeLand").style.backgroundImage = "url('" + HLBiome + "Spot.png')";
-    //centers map on homeLand
+    //TODO Load structures and other visible lands
+    //centers map on homeLand/current land
     document.getElementById("mapArea").style.top = ((h / 2) - 472) + "px";
     document.getElementById("mapArea").style.left = ((w / 2) - 400) + "px";
 });
@@ -87,9 +89,13 @@ socket.on("displayExtraLand", function (name, xcoord, ycoord, biome, pop, hap, t
 });
 //Land listeners
 
+//Structure listeners
 
+//Structure listeners
 
 //General listeners
+
+//Sets the specified element's (id) innerHTML to some data
 socket.on("displayData", function (elem, data) {
     document.getElementById(elem).innerHTML = data;
 });

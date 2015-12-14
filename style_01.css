@@ -230,3 +230,61 @@ body{
 
 
 /*land end*/
+
+/*structure start*/
+
+.structImg{
+    width:100px;
+    height:100px;
+
+    margin:0px 15px 0px 0px;
+
+    float:left;
+}
+
+
+
+.structDataList{
+    width:166px;
+
+    list-style-type:none;
+    margin:0;
+    padding:0;
+
+    float:left;
+}
+
+.structDataList li{        
+    overflow:auto;
+}
+
+.structDataList > li:nth-child(odd){
+    background-color:#e1deda;
+}
+
+.structDataList > li:nth-child(even){
+    background-color:#f5f4f3;
+}
+
+.structDropDownHover:hover ul li{
+    display:block;
+}
+
+.structDropDown{
+    list-style-type:none;
+    
+    margin:0;
+    padding:0;
+    position:absolute;
+}
+
+.structDropDown li{
+    background-color:#b5b3b0;
+
+    width:126px;
+
+    padding:0 0 0 40px;
+    display:none;
+}
+
+/*structure end*/

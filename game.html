@@ -10,16 +10,7 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script type="text/javascript" src="cookie.js"></script>
     <script type="text/javascript" src="comm.js"></script>
-    <script type="text/javascript">
 
-        
-        
-        /*
-         * Important Note: Some items, I found this with data pages, may become cached and display the outdated cached version instead of an updated
-         * version. If this is seen, you need to delete the cache for the page. For chrome press F12, click and hold on the reload button for a menu
-         * to appear, click the option that removes cache. After the reload the updated page should be seen.
-         */
-    </script>
 </head>
 <body onload="preloadImages(); makeDraggable(); loadMap()">
 
@@ -51,6 +42,7 @@
 
     <div id="contentArea">
 
+        <!--Data bar-->
         <ul id="navList">
             <li>
                 <img id="map" class="dataLink" onclick="mapClick()" alt="Back to Map" />
@@ -72,10 +64,12 @@
             </li>
         </ul>
 
-        <div id="mapArea" class="ui-widget-content"><!--Map here-->
+        <!--Map here-->
+        <div id="mapArea" class="ui-widget-content">
             <div class="mapPanel" id="homeLand"></div>
         </div>
 
+        <!--Notification box for data button click-->
         <div id="notContainer" class="ui-widget-content">
             <div id="notTitleBar">
                 <div id="notTitle"></div>

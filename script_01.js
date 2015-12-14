@@ -22,12 +22,14 @@ function preloadImages() {
 
 }
 
+//Makes the notification boxes draggable, without having the inner components also draggable
 function makeDraggable() {
     $("#mapArea, #notContainer").draggable({
         cancel: "#notContent, #notClose",
     });
 }
 
+//Used when a data button is clicked to bring up the correct notification box
 function dataClick(dataid) {
 
     //gets window width by using a supported method of the browser
@@ -40,17 +42,24 @@ function dataClick(dataid) {
             document.documentElement.clientHeight ||
             document.body.clientHeight;
 
+    //Clears last content of notification box
     $("#notContent").empty();
     $("#notTitle").empty();
+    //Loads content of data page into content area of notification box
     $("#notContent").load(dataid + ".html");
+    //Positions notification box in the center-ish of the page
     getE("notContainer").setAttribute("style", "display:block; top:" + ((h / 2)-300) + "px; left:" + ((w / 2)-300) + "px;");
 
 }
 
+//Just makes the notification box invisible, effectively clearing it from the screen
+//Does clear or empty content to possibly allow for time savings if user selects same option again
 function notCloseClick() {
-    getE("notContainer").setAttribute("style", "display:none;");
+    getE("notContainer").style.display = "none";
 }
-//Yes these are the same but mapClick may expand to more functions later and better to seperate now than later
+
+//When map data button is clicked
+//Sets notification to be invisible, centers current land to screen
 function mapClick() {
 
     //gets window width by using a supported method of the browser
@@ -64,7 +73,11 @@ function mapClick() {
             document.body.clientHeight;
 
     getE("notContainer").style.display = "none";
-    //centers map on homeLand
+    //centers map on homeLand/current land
     document.getElementById("mapArea").style.top = ((h / 2) - 472) + "px";
     document.getElementById("mapArea").style.left = ((w / 2) - 400) + "px";
+}
+
+function dropDown(id) {
+    alert("HI");
 }
