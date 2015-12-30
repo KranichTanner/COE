@@ -81,6 +81,11 @@ io.on("connection", function (socket) {
         landClick(iduser, socket);
     });
     
+    socket.on("addStructClick", function (iduser) {
+        console.log("Add structure button clicked...");
+        addStructClick(iduser, socket);
+    });
+
     socket.on("populationClick", function (iduser) {
         console.log("Population button clicked...");
         populationClick(iduser, socket);
@@ -254,7 +259,7 @@ function addLand(username, x, y, population){
     function insertLand() {
         if (done === 4) {
             //Inserts new land into lands table
-            connection.query("INSERT INTO lands(name, xcoord, ycoord, biome, buildSpots, neighbor) VALUES('" + username + "s Land', " + x + ", " + y + ", '" + biome + "', 3, " + n + "); SELECT LAST_INSERT_ID()", function (err, rows) {
+            connection.query("INSERT INTO lands(name, xcoord, ycoord, biome, buildSpots, neighbor) VALUES('" + username + "''s Land', " + x + ", " + y + ", '" + biome + "', 3, " + n + "); SELECT LAST_INSERT_ID()", function (err, rows) {
                 if (err) {
                     throw err
                 }
@@ -273,6 +278,7 @@ function addLand(username, x, y, population){
                                 else {
                                     addPopulation(rows[0].insertId, population);
                                     addStorage(rows[0].insertId);
+                                    addStructUnlocked(rows[0].insertId);
                                 }
                             });
                             connection.query("UPDATE users SET curridlands = " + rows[0].insertId + " WHERE iduser = " + rows2[0].iduser + "", function (err) { 
@@ -338,7 +344,31 @@ function addStorage(idlands){
     });
 }
 
-
+function addStructUnlocked(idlands){
+    //Insert new structure unlocked row into structuresunlocked data table, with land connection
+    connection.query("SELECT * FROM landsstructuresunlocked WHERE idlands = " + idlands + "", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {
+            if (rows.length === 0) {
+                connection.query("INSERT INTO structuresunlocked VALUES()", function (err, rows) { //Since the values are predefaulted this will add a new, fresh row. This, for some reason, does not create an array for rows - rows is a single variable of the insert
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        connection.query("INSERT INTO landsstructuresunlocked(idlands, idstructuresunlocked) VALUES(" + idlands + ", " + rows.insertId + ")", function (err) {
+                            if (err) throw err;
+                        });
+                    }
+                });
+            }
+            else {
+                console.log("ERROR: land " + idlands + " already has a structures unlocked row");
+            }
+        }
+    });
+}
 
 function loadMap(iduser, socket){
     //Get current land biome and send back to client
@@ -353,7 +383,6 @@ function loadMap(iduser, socket){
     });
 }
 
-
 function landClick(iduser, socket){
     //landAllGov
     
@@ -366,8 +395,8 @@ function landClick(iduser, socket){
             var totpop = 0;
             var tothap = 0;
             for (x = 0; x < rows.length; ++x) {
-                totpop += rows[0].count;
-                tothap += rows[0].happiness;
+                totpop += rows[x].count;
+                tothap += rows[x].happiness;
             }
             //landAllPopCount
             socket.emit("displayData", "landAllPopCountData", totpop);
@@ -384,7 +413,7 @@ function landClick(iduser, socket){
 
     //TODO landAllTopExData 
 
-    //landCurData
+    //landCurData (Can be condensed)
     connection.query("SELECT curridlands FROM users WHERE iduser = " + iduser + "", function (err, rows) {
         if (err) {
             throw err;
@@ -444,8 +473,9 @@ function landClick(iduser, socket){
 
                 }
             });
-
-            connection.query("SELECT * FROM userslands WHERE idlands <> " + currid + "", function (err, rows) {
+            
+            //Get lands other than current
+            connection.query("SELECT * FROM userslands WHERE idlands <> " + currid + " AND iduser = " + iduser + "", function (err, rows) {
                 if (err) {
                     throw err;
                 }
@@ -505,6 +535,26 @@ function landClick(iduser, socket){
             });
 
         }//currid else
+    });
+}
+
+function addStructClick(iduser, socket){
+    connection.query("SELECT * FROM structuresunlocked WHERE idstructuresunlocked IN (SELECT idstructuresunlocked FROM landsstructuresunlocked WHERE idlands IN (SELECT idlands FROM userslands WHERE iduser = " + iduser + "))", function (err, rows) {
+        if (err) {
+            throw err;
+        }
+        else {//IMPORTANT: Need to add new if for each available structure - unlocked or locked
+            if (rows[0].townhall > 0) {
+                connection.query("SELECT * FROM structureslist WHERE idstructureslist = " + rows[0].townhall + "", function (err, rows) {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        socket.emit("displayAvailableStruct", rows[0].name, rows[0].buildTime, rows[0].totWorkers);
+                    }
+                });
+            }
+        }
     });
 }
 

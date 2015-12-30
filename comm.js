@@ -24,6 +24,11 @@ function landClick() {
     socket.emit("landClick", iduser);
 }
 
+function addStructClick() {
+    var iduser = docCookies.getItem("iduser");
+    socket.emit("addStructClick", iduser);
+}
+
 function populationClick() {
     var iduser = docCookies.getItem("iduser");
     socket.emit("populationClick", iduser);
@@ -90,7 +95,9 @@ socket.on("displayExtraLand", function (name, xcoord, ycoord, biome, pop, hap, t
 //Land listeners
 
 //Structure listeners
-
+socket.on("displayAvailableStruct", function (name, buildtime, workersheld) {//TODO Add image and cost and resources
+    $("#structBodyDiv").append('<div class="dataCellBorder dataCellHalfWidth"><div class="dataCell"><img class="structImg"/><ul class="structDataList"><li><span class="dataCellLabel">Name:&nbsp;</span><span class="dataCellData">' + name + '</span></li><li class="structDropDownHover">Cost<ul class="structDropDown"><!--Dynamic added for resource cost--></ul></li><li><span class="dataCellLabel">Build Time:&nbsp;</span><span class="dataCellData">' + buildtime + '</span></li><li class="structDropDownHover">Resources<ul class="structDropDown"><!--Dynamic added for resources produced--></ul></li><li><span class="dataCellLabel">Workers held:&nbsp;</span><span class="dataCellData">' + workersheld + '</span></li></ul></div></div>');
+});
 //Structure listeners
 
 //General listeners
